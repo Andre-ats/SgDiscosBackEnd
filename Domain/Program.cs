@@ -1,6 +1,6 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using Domain.Entidade.UsuarioEntidade;
 
-app.MapGet("/", () => "Hello World!");
+Usuario usuario = Usuario.CriarUsuario("Teste", "teste@gmail.com", "OIOIawkdakdwad", "11111111111", DateTime.Now);
 
-app.Run();
+
+Console.WriteLine(usuario.Senha);
