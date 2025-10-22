@@ -8,11 +8,10 @@ public class Usuario : EntidadeBase
     public string Email { get; protected set; }
     public string Senha { get; protected set; }
     public string Cpf { get; protected set; }
-    public DateTime DataDeCriacao { get; protected set; }
     
     private Usuario(){}
 
-    public static Usuario CriarUsuario(string nome, string email, string senha, string cpf, DateTime dataDeCriacao)
+    public static Usuario CriarUsuario(string nome, string email, string senha, string cpf)
     {
         Usuario usuario = new Usuario()
         {
@@ -21,7 +20,8 @@ public class Usuario : EntidadeBase
             Email = email,
             Senha = Hash256.CriptografiaSenha(senha),
             Cpf = cpf,
-            DataDeCriacao = dataDeCriacao
+            DataDeCriacao = DateTime.Now,
+            DataDeAtualizacao = DateTime.Now,
         };
 
         return usuario;
