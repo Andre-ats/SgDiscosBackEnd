@@ -1,3 +1,4 @@
+using Domain.Entidade.PedidoEntidade;
 using Domain.Utilitarios;
 
 namespace Domain.Entidade.UsuarioEntidade;
@@ -8,6 +9,7 @@ public class Usuario : EntidadeBase
     public string Email { get; protected set; }
     public string Senha { get; protected set; }
     public string Cpf { get; protected set; }
+    public List<Pedido> ListaPedidos { get; protected set; } = new();
     
     private Usuario(){}
 
