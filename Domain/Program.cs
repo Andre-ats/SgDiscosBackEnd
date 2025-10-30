@@ -1,6 +1,10 @@
 using Domain.Entidade.UsuarioEntidade;
+using Domain.Factory.UsuarioFactory;
 
-Usuario usuario = Usuario.CriarUsuario("Teste", "teste@gmail.com", "OIOIawkdakdwad", "11111111111");
+var r = UsuarioFactory.CriarUsuarioFactory("A", "andre", "andre", "123");
 
 
-Console.WriteLine(usuario.Senha);
+if (r.IsSuccess)
+    Console.WriteLine($"{r.Value.Nome} | {r.Value.Email} | {r.Value.Cpf}");
+else
+    Console.WriteLine(string.Join(" | ", r.Errors.Select(e => e.Message)));
