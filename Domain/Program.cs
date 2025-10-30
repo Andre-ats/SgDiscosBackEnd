@@ -1,7 +1,7 @@
 using Domain.Entidade.UsuarioEntidade;
 using Domain.Factory.UsuarioFactory;
 
-var r = UsuarioFactory.CriarUsuarioFactory("A", "andre", "andre", "123");
+var r = UsuarioFactory.CriarUsuarioFactory("Andre", "kawopen419@filipx.com", "Teste@123", "47138347855");
 
 
 if (r.IsSuccess)
