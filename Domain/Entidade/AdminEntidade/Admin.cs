@@ -10,7 +10,7 @@ public class Admin : EntidadeBase
     
     private Admin(){}
 
-    public Admin CriarAdmin(string nome, string email, string senha)
+    public static Admin CriarAdmin(string nome, string email, string senha)
     {
         Admin admin = new Admin()
         {
