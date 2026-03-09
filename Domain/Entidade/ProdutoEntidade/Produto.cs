@@ -20,7 +20,7 @@ public class Produto : EntidadeBase
     
     private Produto(){}
 
-    public Produto CriarProduto(string nome, string nomeArtistaBanda, string? empresa, 
+    public static Produto CriarProduto(string nome, string nomeArtistaBanda, string? empresa, 
         string? origem, string? anoLancamento, EnumEmbalagemProduto embalagem, 
         EnumFormatoProduto formato, EnumTipoDeAlbum tipoDeAlbum, List<EnumGeneroMusicalProduto> generoMusical, int? quantidadeCancoes, int quantidade, decimal preco)
     {
