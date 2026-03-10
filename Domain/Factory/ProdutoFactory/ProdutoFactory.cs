@@ -7,8 +7,6 @@ namespace Domain.Factory.ProdutoFactory;
 
 public class ProdutoFactory
 {
-    public string _NomeProduto { get; set; }
-    public string _NomeArtistaBandaProduto { get; set; }
     public string? _EmpresaProduto { get; set; }
     public string? _OrigemProduto { get; set; }
     public string? _AnoLancamentoProduto { get; set; }
@@ -27,6 +25,12 @@ public class ProdutoFactory
     {
         var nomeProdutoValidar = ProdutoStringValidacao.Validar(nomeProduto, "Nome do Produto", 80, 2);
         if (nomeProdutoValidar.IsFailed) return Result.Fail(nomeProdutoValidar.Errors);
+        
+        var nomeArtistaBandaProdutoValidar = ProdutoStringValidacao.Validar(nomeArtistaBandaProduto, "Nome do Artista", 80, 2);
+        if (nomeArtistaBandaProdutoValidar.IsFailed) return Result.Fail(nomeArtistaBandaProdutoValidar.Errors);
+        
         return Result.Ok();
+        
+        
     }
 }
