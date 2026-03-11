@@ -12,24 +12,24 @@ public class ProdutoFactory
         List<EnumGeneroMusicalProduto> generoMusicalProdutos, int? quantidadeDeCancoesProduto, int quantidadeProduto, decimal precoProduto)
     {
         
-        var camposString = new (string? valor, string nome, int max, int min, bool obrigatorio)[]
+        var camposString = new (string? valor, string nome, int min, int max, bool obrigatorio)[]
         {
-            (nomeProduto, "Nome do Produto", 80, 2, true),
-            (nomeArtistaBandaProduto, "Nome do Artista", 80, 2, true),
-            (empresaProduto, "Empresa", 80, 2, false),
-            (origemProduto, "Origem", 80, 2, false)
+            (nomeProduto, "Nome do Produto", 2, 80, true),
+            (nomeArtistaBandaProduto, "Nome do Artista", 2, 80, true),
+            (empresaProduto, "Empresa", 2, 80, false),
+            (origemProduto, "Origem", 2, 80, false)
         };
         
-        var camposInt = new (int? valor, string nome, int max, int min, bool obrigatorio)[]
+        var camposInt = new (int? valor, string nome, int min, int max, bool obrigatorio)[]
         {
-            (anoLancamentoProduto, "Ano de Lançamento", DateTime.UtcNow.Year + 1, 1900, false),
-            (quantidadeDeCancoesProduto, "Quantia de Canções", 150, 1, false),
-            (quantidadeProduto, "Quantidade de Produto", 1000, 1, true),
+            (anoLancamentoProduto, "Ano de Lançamento", 1900, DateTime.UtcNow.Year + 1, false),
+            (quantidadeDeCancoesProduto, "Quantia de Canções", 1, 150, false),
+            (quantidadeProduto, "Quantidade de Produto", 1, 1000, true),
         };
         
-        var camposDecimal = new (decimal? valor, string nome, decimal max, decimal min, bool obrigatorio)[]
+        var camposDecimal = new (decimal? valor, string nome, decimal min, decimal max, bool obrigatorio)[]
         {
-            (precoProduto, "Preço do Produto", 10000m, 1m, true)
+            (precoProduto, "Preço do Produto", 1m, 10000m, true)
         };
         
         foreach (var campo in camposString)
