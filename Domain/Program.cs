@@ -5,19 +5,21 @@ using Domain.Factory.UsuarioFactory;
 
 //var r = UsuarioFactory.CriarUsuarioFactory("And", "kawopen419@filipx.com", "Teste@123", "47138347855");
 var r = ProdutoFactory.CriarProdutoFactory(
-    "p00",
-    "Artista Teste",
+    "Astro World",
+    "Travis Scott",
     null,
-    null,
-    null,
+    "EUA",
+    2010,
     EnumEmbalagemProduto.Vazio,
     EnumFormatoProduto.Vazio,
     EnumTipoDeAlbum.Vazio,
-    new List<EnumGeneroMusicalProduto>(),
+    new List<EnumGeneroMusicalProduto>()
+    {
+        EnumGeneroMusicalProduto.Teste
+    },
     null,
-    1,
-    10m,
-    null
+    10,
+    100m
 );
 
 

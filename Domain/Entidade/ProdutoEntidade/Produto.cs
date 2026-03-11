@@ -8,7 +8,7 @@ public class Produto : EntidadeBase
     public string NomeArtistaBandaProduto { get; protected set; }
     public string? EmpresaProduto { get; protected set; }
     public string? OrigemProduto { get; protected set; }
-    public string? AnoLancamentoProduto { get; protected set; }
+    public int? AnoLancamentoProduto { get; protected set; }
     public EnumEmbalagemProduto EmbalagemProduto { get; protected set; }
     public EnumFormatoProduto FormatoProduto { get; protected set; }
     public EnumTipoDeAlbum TipoDeAlbum { get; protected set; }
@@ -21,7 +21,7 @@ public class Produto : EntidadeBase
     private Produto(){}
 
     public static Produto CriarProduto(string nome, string nomeArtistaBanda, string? empresa, 
-        string? origem, string? anoLancamento, EnumEmbalagemProduto embalagem, 
+        string? origem, int? anoLancamento, EnumEmbalagemProduto embalagem, 
         EnumFormatoProduto formato, EnumTipoDeAlbum tipoDeAlbum, List<EnumGeneroMusicalProduto> generoMusical, int? quantidadeCancoes, int quantidade, decimal preco)
     {
         Produto produto = new Produto()
