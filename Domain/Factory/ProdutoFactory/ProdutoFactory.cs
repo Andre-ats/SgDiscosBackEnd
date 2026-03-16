@@ -7,7 +7,7 @@ namespace Domain.Factory.ProdutoFactory;
 
 public class ProdutoFactory
 {
-    public static Result<Produto> CriarProdutoFactory(string nomeProduto, string nomeArtistaBandaProduto, string? empresaProduto, string? origemProduto,
+    public Result<Produto> CriarProdutoFactory(string nomeProduto, string nomeArtistaBandaProduto, string? empresaProduto, string? origemProduto,
         int? anoLancamentoProduto, EnumEmbalagemProduto embalagemProduto, EnumFormatoProduto formatoProduto, EnumTipoDeAlbum tipoDeAlbum, 
         List<EnumGeneroMusicalProduto> generoMusicalProdutos, int? quantidadeDeCancoesProduto, int quantidadeProduto, decimal precoProduto)
     {

@@ -4,7 +4,8 @@ using Domain.Factory.ProdutoFactory;
 using Domain.Factory.UsuarioFactory;
 
 //var r = UsuarioFactory.CriarUsuarioFactory("And", "kawopen419@filipx.com", "Teste@123", "47138347855");
-var r = ProdutoFactory.CriarProdutoFactory(
+ProdutoFactory produtoFactory = new ProdutoFactory();
+var r = produtoFactory.CriarProdutoFactory(
     "Astro World",
     "Travis Scott",
     null,

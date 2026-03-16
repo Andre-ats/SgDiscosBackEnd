@@ -8,7 +8,7 @@ namespace Domain.Factory.UsuarioFactory;
 
 public class UsuarioFactory
 {
-    public static Result<Usuario> CriarUsuarioFactory(string nome, string email, string senha, string cpf)
+    public Result<Usuario> CriarUsuarioFactory(string nome, string email, string senha, string cpf)
     {
         var nomeValidar = NomeUsuarioValidacao.Validar(nome);
         if (nomeValidar.IsFailed) return Result.Fail(nomeValidar.Errors);
