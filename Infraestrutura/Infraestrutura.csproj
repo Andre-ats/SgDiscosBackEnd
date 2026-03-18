@@ -1,11 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-      <UserSecretsId>22e64ea1-1330-4bdd-af46-90dc1a443854</UserSecretsId>
-  </PropertyGroup>
+    </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="EntityFramework" Version="6.4.4" />
         <PackageReference Include="FluentResults" Version="3.16.0" />
@@ -32,6 +31,8 @@
         <PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Factory\ProdutoFactory\Validacoes\" />
+        <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
+
+
 </Project>
