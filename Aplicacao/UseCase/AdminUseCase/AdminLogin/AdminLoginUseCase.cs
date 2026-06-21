@@ -3,7 +3,7 @@ using Domain.Utilitarios;
 using FluentResults;
 using Infraestrutura.Repositorio.AdminRepositorio;
 
-namespace Aplicacao.UseCase.AdminUseCase.AdminLoginUseCase;
+namespace Aplicacao.UseCase.AdminUseCase.AdminLogin;
 
 public class AdminLoginUseCase : IUseCaseBase<AdminLoginUseCaseInput, AdminLoginUseCaseOutput>
 {

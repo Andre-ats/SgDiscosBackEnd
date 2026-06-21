@@ -1,6 +1,6 @@
 using Aplicacao.UseCase.UseCaseBase;
 
-namespace Aplicacao.UseCase.AdminUseCase.AdminLoginUseCase;
+namespace Aplicacao.UseCase.AdminUseCase.AdminLogin;
 
 public class AdminLoginUseCaseInput : UseCaseBaseInput
 {
