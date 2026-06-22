@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "sXvH2fnboxA=",
-  "success": false,
+  "dgSpecHash": "Sgq4g3Jqt8hsDKsd4P99UonbmsSs42m0bvxRUfzPxENDAbza2xy6h4s5cVdE7RfeaT13g+1Ugm0MOpBrYd08LA==",
+  "success": true,
   "projectFilePath": "/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Infraestrutura/Infraestrutura.csproj",
   "expectedPackageFiles": [
     "/home/andre/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
@@ -118,15 +118,5 @@
     "/home/andre/.nuget/packages/system.windows.extensions/4.7.0/system.windows.extensions.4.7.0.nupkg.sha512",
     "/home/andre/.nuget/packages/zstdsharp.port/0.7.1/zstdsharp.port.0.7.1.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1108",
-      "level": "Error",
-      "message": "Cycle detected. \n  Infraestrutura -> Aplicacao -> Infraestrutura.",
-      "libraryId": "Infraestrutura",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }

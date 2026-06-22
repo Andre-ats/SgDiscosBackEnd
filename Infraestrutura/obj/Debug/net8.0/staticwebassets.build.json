@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "/knYLAqET/EfZdHKbjTLwvbcTyQy1VU8U1CAFFhgpuo=",
+  "Source": "Infraestrutura",
+  "BasePath": "_content/Infraestrutura",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Domain/Domain.csproj",
+      "Version": 2,
+      "Source": "Domain",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

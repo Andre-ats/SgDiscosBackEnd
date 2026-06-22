@@ -217,9 +217,6 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/Aplicacao.csproj": {
-                "projectPath": "/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/Aplicacao.csproj"
-              },
               "/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Domain/Domain.csproj": {
                 "projectPath": "/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Domain/Domain.csproj"
               }
