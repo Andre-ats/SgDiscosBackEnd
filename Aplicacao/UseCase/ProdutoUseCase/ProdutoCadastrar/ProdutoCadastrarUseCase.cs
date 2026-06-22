@@ -44,8 +44,7 @@ public class ProdutoCadastrarUseCase : IUseCaseBase<ProdutoCadastrarUseCaseInput
 
         return Result.Ok(new ProdutoCadastrarUseCaseOutput()
         {
-            Produto = produtoResult.Value,
-            IdProduto = produtoResult.Value.Id
+            Produto = produtoResult.Value
         });
 
     }
