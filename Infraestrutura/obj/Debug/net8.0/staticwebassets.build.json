@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/knYLAqET/EfZdHKbjTLwvbcTyQy1VU8U1CAFFhgpuo=",
+  "Hash": "2uJZd4gTT9uVbSCeGAWM7wN8tY2Y+wpSm7j0Gma5XAI=",
   "Source": "Infraestrutura",
   "BasePath": "_content/Infraestrutura",
   "Mode": "Default",
@@ -11,10 +11,10 @@
       "Version": 2,
       "Source": "Domain",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
       "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
       "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
       "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
     }
   ],
