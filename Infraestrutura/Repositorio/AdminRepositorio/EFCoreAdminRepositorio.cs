@@ -3,11 +3,11 @@ using FluentResults;
 
 namespace Infraestrutura.Repositorio.AdminRepositorio;
 
-public class EFCoreAdminRepository : IAdminRepositorio
+public class EFCoreAdminRepositorio : IAdminRepositorio
 {
     private readonly DataBaseContext _dataBaseContext = null!;
 
-    public EFCoreAdminRepository(DataBaseContext context)
+    public EFCoreAdminRepositorio(DataBaseContext context)
     {
         _dataBaseContext = context;
     }
