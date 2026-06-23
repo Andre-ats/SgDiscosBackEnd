@@ -26,5 +26,8 @@
         <ProjectReference Include="..\Aplicacao\Aplicacao.csproj" />
         <ProjectReference Include="..\Infraestrutura\Infraestrutura.csproj" />
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Controller\AdminController\" />
+    </ItemGroup>
 
 </Project>
