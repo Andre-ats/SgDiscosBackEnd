@@ -1,4 +1,4 @@
-using Aplicacao.UseCase.UseCaseBase;
+using Aplicacao.UseCase.UseCasePadrao;
 using Domain.Entidade.AdminEntidade;
 
 namespace Aplicacao.UseCase.AdminUseCase.AdminLogin;

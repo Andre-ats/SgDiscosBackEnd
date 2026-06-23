@@ -1,4 +1,4 @@
-using Aplicacao.UseCase.UseCaseBase;
+using Aplicacao.UseCase.UseCasePadrao;
 using Domain.Entidade.ProdutoEntidade;
 
 namespace Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;

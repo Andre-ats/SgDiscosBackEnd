@@ -1,8 +1,8 @@
-
-
 using System.Text;
 using Api.Config;
+using Aplicacao.UseCase.AdminUseCase.AdminLogin;
 using Infraestrutura.Repositorio;
+using Infraestrutura.Repositorio.AdminRepositorio;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -28,6 +28,8 @@ builder.Services.AddControllers()
     );
 
 builder.Services.AddScoped<DataBaseContext>();
+builder.Services.AddScoped<IAdminRepositorio, EFCoreAdminRepositorio>();
+builder.Services.AddScoped<AdminLoginUseCase>();
 
 
 // Add services to the container.

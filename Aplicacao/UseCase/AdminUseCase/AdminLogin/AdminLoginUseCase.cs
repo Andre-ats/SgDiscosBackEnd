@@ -1,11 +1,12 @@
-using Aplicacao.UseCase.UseCaseBase;
+using Aplicacao.UseCase.UseCasePadrao;
+using Domain.Entidade.AdminEntidade;
 using Domain.Utilitarios;
 using FluentResults;
 using Infraestrutura.Repositorio.AdminRepositorio;
 
 namespace Aplicacao.UseCase.AdminUseCase.AdminLogin;
 
-public class AdminLoginUseCase : IUseCaseBase<AdminLoginUseCaseInput, AdminLoginUseCaseOutput>
+public class AdminLoginUseCase : UseCaseBase<AdminLoginUseCaseInput, AdminLoginUseCaseOutput>
 {
     private readonly IAdminRepositorio _adminRepositorio;
     
@@ -14,7 +15,7 @@ public class AdminLoginUseCase : IUseCaseBase<AdminLoginUseCaseInput, AdminLogin
         _adminRepositorio = adminRepositorio;
     }
     
-    protected override Result<AdminLoginUseCaseOutput> executeUseCase(AdminLoginUseCaseInput input)
+    protected override Result<AdminLoginUseCaseOutput> ExecuteUseCase(AdminLoginUseCaseInput input)
     {
         var admin = _adminRepositorio.GetAdminLogin(input.Login, Hash256.CriptografiaSenha(input.Senha));
 

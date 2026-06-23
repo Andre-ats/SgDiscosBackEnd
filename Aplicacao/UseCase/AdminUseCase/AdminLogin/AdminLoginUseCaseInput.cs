@@ -1,4 +1,4 @@
-using Aplicacao.UseCase.UseCaseBase;
+using Aplicacao.UseCase.UseCasePadrao;
 
 namespace Aplicacao.UseCase.AdminUseCase.AdminLogin;
 

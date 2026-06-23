@@ -1,4 +1,4 @@
-using Aplicacao.UseCase.UseCaseBase;
+using Aplicacao.UseCase.UseCasePadrao;
 using Domain.Entidade.ProdutoEntidade;
 using Domain.Factory.ProdutoFactory;
 using FluentResults;
@@ -6,7 +6,7 @@ using Infraestrutura.Repositorio.ProdutoRepositorio;
 
 namespace Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;
 
-public class ProdutoCadastrarUseCase : IUseCaseBase<ProdutoCadastrarUseCaseInput, ProdutoCadastrarUseCaseOutput>
+public class ProdutoCadastrarUseCase : UseCaseBase<ProdutoCadastrarUseCaseInput, ProdutoCadastrarUseCaseOutput>
 {
     private readonly IProdutoRepositorio _produtoRepositorio;
 
@@ -15,7 +15,7 @@ public class ProdutoCadastrarUseCase : IUseCaseBase<ProdutoCadastrarUseCaseInput
         _produtoRepositorio = produtoRepositorio;
     }
     
-    protected override Result<ProdutoCadastrarUseCaseOutput> executeUseCase(ProdutoCadastrarUseCaseInput input)
+    protected override Result<ProdutoCadastrarUseCaseOutput> ExecuteUseCase(ProdutoCadastrarUseCaseInput input)
     {
         var produtoInput = input.Produto;
         
