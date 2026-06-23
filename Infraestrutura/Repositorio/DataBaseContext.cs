@@ -8,6 +8,11 @@ namespace Infraestrutura.Repositorio;
 public class DataBaseContext : DbContext
 {
     public DataBaseContext() { }
+    
+    public DataBaseContext(DbContextOptions<DataBaseContext> options)
+        : base(options)
+    {
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -15,8 +20,7 @@ public class DataBaseContext : DbContext
         {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false)
-                .AddJsonFile($"appsettings.Development.json", optional: true)
+                .AddJsonFile("appsettings.Development.json", optional: false)
                 .Build();
 
             var connectionString = configuration.GetConnectionString("DefaultConnection");

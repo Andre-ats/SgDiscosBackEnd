@@ -1,9 +1,11 @@
 using System.Text;
 using Api.Config;
+using Api.Service.TokenService;
 using Aplicacao.UseCase.AdminUseCase.AdminLogin;
 using Infraestrutura.Repositorio;
 using Infraestrutura.Repositorio.AdminRepositorio;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
@@ -27,7 +29,11 @@ builder.Services.AddControllers()
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
     );
 
-builder.Services.AddScoped<DataBaseContext>();
+builder.Services.AddDbContext<DataBaseContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
+
 builder.Services.AddScoped<IAdminRepositorio, EFCoreAdminRepositorio>();
 builder.Services.AddScoped<AdminLoginUseCase>();
 
