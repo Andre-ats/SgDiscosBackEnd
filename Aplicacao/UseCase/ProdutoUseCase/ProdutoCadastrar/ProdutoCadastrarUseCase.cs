@@ -17,7 +17,7 @@ public class ProdutoCadastrarUseCase : UseCaseBase<ProdutoCadastrarUseCaseInput,
     
     protected override Result<ProdutoCadastrarUseCaseOutput> ExecuteUseCase(ProdutoCadastrarUseCaseInput input)
     {
-        var produtoInput = input.Produto;
+        var produtoInput = input;
         
         var produtoResult = new ProdutoFactory().CriarProdutoFactory(
             produtoInput.NomeProduto,

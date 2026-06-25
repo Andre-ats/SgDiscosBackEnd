@@ -2,8 +2,10 @@ using System.Text;
 using Api.Config;
 using Api.Service.TokenService;
 using Aplicacao.UseCase.AdminUseCase.AdminLogin;
+using Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;
 using Infraestrutura.Repositorio;
 using Infraestrutura.Repositorio.AdminRepositorio;
+using Infraestrutura.Repositorio.ProdutoRepositorio;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -36,6 +38,10 @@ builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 
 builder.Services.AddScoped<IAdminRepositorio, EFCoreAdminRepositorio>();
 builder.Services.AddScoped<AdminLoginUseCase>();
+
+builder.Services.AddScoped<IProdutoRepositorio, EFCoreProdutoRepositorio>();
+builder.Services.AddScoped<ProdutoCadastrarUseCase>();
+
 
 
 // Add services to the container.
