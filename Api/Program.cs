@@ -3,6 +3,7 @@ using Api.Config;
 using Api.Service.TokenService;
 using Aplicacao.UseCase.AdminUseCase.AdminLogin;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;
+using Aplicacao.UseCase.ProdutoUseCase.ProdutoListagem.ProdutoListar;
 using Infraestrutura.Repositorio;
 using Infraestrutura.Repositorio.AdminRepositorio;
 using Infraestrutura.Repositorio.ProdutoRepositorio;
@@ -41,6 +42,7 @@ builder.Services.AddScoped<AdminLoginUseCase>();
 
 builder.Services.AddScoped<IProdutoRepositorio, EFCoreProdutoRepositorio>();
 builder.Services.AddScoped<ProdutoCadastrarUseCase>();
+builder.Services.AddScoped<ProdutoListarUseCase>();
 
 
 
