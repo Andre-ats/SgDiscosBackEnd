@@ -13,6 +13,9 @@ public class Produto : EntidadeBase
     public EnumFormatoProduto FormatoProduto { get; protected set; }
     public EnumTipoDeAlbum TipoDeAlbum { get; protected set; }
     public List<EnumGeneroMusicalProduto> GenerosMusicaisProduto { get; protected set; }
+    public List<string> ListaImagensLinks { get; protected set; } = [];
+    public List<string> ListaVideosLinks { get; protected set; } = [];
+    
     public int? QuantidadeDeCancoesProduto { get; protected set; }
     public int QuantidadeProduto { get; protected set; }
     public decimal PrecoProduto { get; protected set; }
@@ -44,5 +47,25 @@ public class Produto : EntidadeBase
             PrecoDescontoProduto = null
         };
         return produto;
+    }
+
+    public Produto AdicionarImagem(string urlImagem)
+    {
+        if (string.IsNullOrWhiteSpace(urlImagem))
+            return this;
+        
+        ListaImagensLinks.Add(urlImagem);
+
+        return this;
+    }
+    
+    public Produto AdicionarVideo(string urlVideo)
+    {
+        if (string.IsNullOrWhiteSpace(urlVideo))
+            return this;
+        
+        ListaVideosLinks.Add(urlVideo);
+
+        return this;
     }
 }
