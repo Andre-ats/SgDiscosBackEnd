@@ -1,3 +1,4 @@
+using Api.Service.ArquivosStorage;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoListagem.ProdutoListar;
 using Microsoft.AspNetCore.Authorization;
@@ -9,7 +10,8 @@ namespace Api.Controller.Produto;
 [Route("[controller]/[action]")]
 public class ProdutoController(
     ProdutoCadastrarUseCase produtoCadastrarUseCase,
-    ProdutoListarUseCase produtoListarUseCase
+    ProdutoListarUseCase produtoListarUseCase,
+    IArquivosStorageService arquivosStorageService
     ) : ControllerBase
 {
     [Authorize(Roles = "Admin")]
@@ -41,5 +43,29 @@ public class ProdutoController(
             return BadRequest(result.Errors);
 
         return Ok(result.Value);
+    }
+    
+    [HttpPost("UploadImagem")]
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> UploadImagem([FromForm] ArquivoStorageServiceInput arquivo)
+    {
+        var result = await arquivosStorageService.UploadImageAsync(arquivo.Arquivo);
+
+        if (result.IsFailed)
+            return BadRequest(result.Errors.Select(e => e.Message));
+
+        return Ok(result.Value.SecureUrl);
+    }
+    
+    [HttpPost("UploadVideo")]
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> UploadVideo([FromForm] ArquivoStorageServiceInput arquivo)
+    {
+        var result = await arquivosStorageService.UploadImageAsync(arquivo.Arquivo);
+
+        if (result.IsFailed)
+            return BadRequest(result.Errors.Select(e => e.Message));
+
+        return Ok(result.Value.SecureUrl);
     }
 }

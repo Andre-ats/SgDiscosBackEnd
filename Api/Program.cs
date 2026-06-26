@@ -1,5 +1,6 @@
 using System.Text;
 using Api.Config;
+using Api.Service.ArquivosStorage;
 using Api.Service.TokenService;
 using Aplicacao.UseCase.AdminUseCase.AdminLogin;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;
@@ -35,6 +36,19 @@ builder.Services.AddControllers()
 builder.Services.AddDbContext<DataBaseContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddSingleton(provider =>
+{
+    var configuration = provider.GetRequiredService<IConfiguration>();
+
+    var account = new CloudinaryDotNet.Account(
+        configuration["Cloudinary:CloudName"],
+        configuration["Cloudinary:ApiKey"],
+        configuration["Cloudinary:ApiSecret"]
+    );
+
+    return new CloudinaryDotNet.Cloudinary(account);
+});
+
 builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 
 builder.Services.AddScoped<IAdminRepositorio, EFCoreAdminRepositorio>();
@@ -44,7 +58,7 @@ builder.Services.AddScoped<IProdutoRepositorio, EFCoreProdutoRepositorio>();
 builder.Services.AddScoped<ProdutoCadastrarUseCase>();
 builder.Services.AddScoped<ProdutoListarUseCase>();
 
-
+builder.Services.AddScoped<IArquivosStorageService, ArquivosStorageService>();
 
 // Add services to the container.
 builder.Services.AddControllers();
