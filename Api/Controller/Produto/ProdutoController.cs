@@ -61,7 +61,7 @@ public class ProdutoController(
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> UploadVideo([FromForm] ArquivoStorageServiceInput arquivo)
     {
-        var result = await arquivosStorageService.UploadImageAsync(arquivo.Arquivo);
+        var result = await arquivosStorageService.UploadVideoAsync(arquivo.Arquivo);
 
         if (result.IsFailed)
             return BadRequest(result.Errors.Select(e => e.Message));
