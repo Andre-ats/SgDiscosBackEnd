@@ -39,7 +39,7 @@ public class ProdutoAdicionarLinksUseCase : UseCaseAsyncBase<ProdutoAdicionarLin
                 if (uploadImage.IsFailed)
                     return Result.Fail(uploadImage.Errors);
                 
-                produto.AdicionarImagem(uploadImage.Value.Url.ToString());
+                produto.AdicionarImagem(uploadImage.Value.PublicId);
             }
             else if (input.TipoDoArquivo == EnumTipoArquivo.Video)
             {
@@ -48,7 +48,7 @@ public class ProdutoAdicionarLinksUseCase : UseCaseAsyncBase<ProdutoAdicionarLin
                 if (uploadVideo.IsFailed)
                     return Result.Fail(uploadVideo.Errors);
                 
-                produto.AdicionarVideo(uploadVideo.Value.Url.ToString());
+                produto.AdicionarVideo(uploadVideo.Value.PublicId);
             }
             else
                 return Result.Fail("Erro em adicionar a Url, tente novamente");

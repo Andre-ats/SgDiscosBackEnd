@@ -19,7 +19,11 @@ public class ArquivosStorageService : IArquivosStorageService
         var uploadParams = new VideoUploadParams()
         {
             File = new FileDescription(arquivo.FileName, arquivo.OpenReadStream()),
-            Folder = "SgDiscos"
+            Folder = "SgDiscos",
+            PublicId = Path.GetFileNameWithoutExtension(arquivo.FileName),
+            UseFilename = true,
+            UniqueFilename = false,
+            Overwrite = false
         };
         
         var result = await _cloudinary.UploadAsync(uploadParams);
@@ -35,7 +39,11 @@ public class ArquivosStorageService : IArquivosStorageService
         var uploadParams = new ImageUploadParams
         {
             File = new FileDescription(arquivo.FileName, arquivo.OpenReadStream()),
-            Folder = "SgDiscos"
+            Folder = "SgDiscos",
+            PublicId = Path.GetFileNameWithoutExtension(arquivo.FileName),
+            UseFilename = true,
+            UniqueFilename = false,
+            Overwrite = false
         };
         
         var result = await _cloudinary.UploadAsync(uploadParams);
