@@ -52,4 +52,27 @@ public class EFCoreProdutoRepositorio : IProdutoRepositorio
             return Result.Fail($"Erro ao listar produtos: {ex.Message}");
         }
     }
+
+    public Result<bool> AtualizarProduto(Produto produto)
+    {
+        try
+        {
+            _dataBaseContext.ProdutosDB.Update(produto);
+
+            var atualizado = _dataBaseContext.SaveChanges() > 0;
+
+            return atualizado
+                ? Result.Ok(true)
+                : Result.Fail("Nenhum registro foi atualizado.");
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail($"Erro ao atualizar o produto: {ex.Message}");
+        }
+    }
+
+    public Result<Produto> GetProdutoById(Guid id)
+    {
+        throw new NotImplementedException();
+    }
 }
