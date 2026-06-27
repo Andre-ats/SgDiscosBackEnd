@@ -1,5 +1,7 @@
+using Aplicacao.Service.ArquivosStorage;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar.ProdutoAtualizarLinks;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar.ProdutoAtualizarLinks.Enum;
+using Aplicacao.UseCase.UseCaseAsync;
 using Aplicacao.UseCase.UseCasePadrao;
 using Domain.Entidade.ProdutoEntidade;
 using FluentResults;
@@ -7,15 +9,17 @@ using Infraestrutura.Repositorio.ProdutoRepositorio;
 
 namespace Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarLinks;
 
-public class ProdutoAdicionarLinksUseCase : UseCaseBase<ProdutoAdicionarLinksUseCaseInput, ProdutoAdicionarLinksUseCaseOutput>
+public class ProdutoAdicionarLinksUseCase : UseCaseAsyncBase<ProdutoAdicionarLinksUseCaseInput, ProdutoAdicionarLinksUseCaseOutput>
 {
     private readonly IProdutoRepositorio _produtoRepositorio;
+    private readonly IArquivosStorageService _arquivosStorageService;
     
-    public ProdutoAdicionarLinksUseCase(IProdutoRepositorio produtoRepositorio)
+    public ProdutoAdicionarLinksUseCase(IProdutoRepositorio produtoRepositorio, IArquivosStorageService arquivosStorageService)
     {
         _produtoRepositorio = produtoRepositorio;
+        _arquivosStorageService = arquivosStorageService;
     }
-    protected override Result<ProdutoAdicionarLinksUseCaseOutput> ExecuteUseCase(ProdutoAdicionarLinksUseCaseInput input)
+    protected override async Task<Result<ProdutoAdicionarLinksUseCaseOutput>> ExecuteUseCase(ProdutoAdicionarLinksUseCaseInput input)
     {
 
         var result = _produtoRepositorio.GetProdutoById(input.IdProduto);
@@ -25,12 +29,27 @@ public class ProdutoAdicionarLinksUseCase : UseCaseBase<ProdutoAdicionarLinksUse
 
         Produto produto = result.Value;
 
-        foreach (var arquivoUrl in input.ArquivoUrlList)
+        foreach (var arquivoUrl in input.ArquivoLista)
         {
-            if (input.TipoDoArquivo.Equals(EnumTipoArquivo.Imagem))
-                produto.AdicionarImagem(arquivoUrl);
-            else if (input.TipoDoArquivo.Equals(EnumTipoArquivo.Video))
-                produto.AdicionarVideo(arquivoUrl);
+
+            if (input.TipoDoArquivo == EnumTipoArquivo.Imagem)
+            {
+                var uploadImage = await _arquivosStorageService.UploadImageAsync(arquivoUrl);
+                
+                if (uploadImage.IsFailed)
+                    return Result.Fail(uploadImage.Errors);
+                
+                produto.AdicionarImagem(uploadImage.Value.Url.ToString());
+            }
+            else if (input.TipoDoArquivo == EnumTipoArquivo.Video)
+            {
+                var uploadVideo = await _arquivosStorageService.UploadVideoAsync(arquivoUrl);
+                
+                if (uploadVideo.IsFailed)
+                    return Result.Fail(uploadVideo.Errors);
+                
+                produto.AdicionarVideo(uploadVideo.Value.Url.ToString());
+            }
             else
                 return Result.Fail("Erro em adicionar a Url, tente novamente");
         }

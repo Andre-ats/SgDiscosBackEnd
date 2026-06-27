@@ -9,7 +9,6 @@
       "Api/1.0.0": {
         "dependencies": {
           "Aplicacao": "1.0.0",
-          "CloudinaryDotNet": "1.27.6",
           "Domain": "1.0.0",
           "Infraestrutura": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.0",
@@ -1715,6 +1714,7 @@
       },
       "Infraestrutura/1.0.0": {
         "dependencies": {
+          "CloudinaryDotNet": "1.27.6",
           "Domain": "1.0.0",
           "EntityFramework": "6.4.4",
           "FluentResults": "3.16.0",

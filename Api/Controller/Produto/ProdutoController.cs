@@ -1,4 +1,6 @@
-using Api.Service.ArquivosStorage;
+using Aplicacao.Service.ArquivosStorage;
+using Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarLinks;
+using Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar.ProdutoAtualizarLinks.Enum;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoListagem.ProdutoListar;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +13,8 @@ namespace Api.Controller.Produto;
 public class ProdutoController(
     ProdutoCadastrarUseCase produtoCadastrarUseCase,
     ProdutoListarUseCase produtoListarUseCase,
-    IArquivosStorageService arquivosStorageService
+    IArquivosStorageService arquivosStorageService,
+    ProdutoAdicionarLinksUseCase produtoAdicionarLinksUseCase
     ) : ControllerBase
 {
     [Authorize(Roles = "Admin")]
@@ -45,27 +48,43 @@ public class ProdutoController(
         return Ok(result.Value);
     }
     
+    [Authorize(Roles = "Admin")]
+    [ProducesResponseType(201)]
+    [ProducesResponseType(401)]
+    [ProducesResponseType(400)]
     [HttpPost("UploadImagem")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> UploadImagem([FromForm] ArquivoStorageServiceInput arquivo)
+    public async Task<IActionResult> UploadImagem([FromForm] ArquivoStorageServiceInput arquivoLista, [FromHeader] Guid produtoId)
     {
-        var result = await arquivosStorageService.UploadImageAsync(arquivo.Arquivo);
+        if (!arquivoLista.ArquivoLista.Any())
+            return BadRequest("Nenhuma imagem foi enviada.");
 
-        if (result.IsFailed)
-            return BadRequest(result.Errors.Select(e => e.Message));
+        var response = await produtoAdicionarLinksUseCase.Execute(
+            new ProdutoAdicionarLinksUseCaseInput(produtoId, EnumTipoArquivo.Imagem, arquivoLista.ArquivoLista));
+        
+        if (response.IsFailed)
+            return BadRequest(response.Errors.Select(e => e.Message));
 
-        return Ok(result.Value.SecureUrl);
+        return Ok(response.Value.Mensagem);
     }
     
+    [Authorize(Roles = "Admin")]
+    [ProducesResponseType(201)]
+    [ProducesResponseType(401)]
+    [ProducesResponseType(400)]
     [HttpPost("UploadVideo")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> UploadVideo([FromForm] ArquivoStorageServiceInput arquivo)
+    public async Task<IActionResult> UploadVideo([FromForm] ArquivoStorageServiceInput arquivoLista, [FromHeader] Guid produtoId)
     {
-        var result = await arquivosStorageService.UploadVideoAsync(arquivo.Arquivo);
+        if (!arquivoLista.ArquivoLista.Any())
+            return BadRequest("Nenhum vídeo foi enviado.");
 
-        if (result.IsFailed)
-            return BadRequest(result.Errors.Select(e => e.Message));
+        var response = await produtoAdicionarLinksUseCase.Execute(
+            new ProdutoAdicionarLinksUseCaseInput(produtoId, EnumTipoArquivo.Video, arquivoLista.ArquivoLista));
+        
+        if (response.IsFailed)
+            return BadRequest(response.Errors.Select(e => e.Message));
 
-        return Ok(result.Value.SecureUrl);
+        return Ok(response.Value.Mensagem);
     }
 }

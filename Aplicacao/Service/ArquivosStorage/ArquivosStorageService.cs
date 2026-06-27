@@ -2,7 +2,7 @@ using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using FluentResults;
 
-namespace Api.Service.ArquivosStorage;
+namespace Aplicacao.Service.ArquivosStorage;
 
 public class ArquivosStorageService : IArquivosStorageService
 {

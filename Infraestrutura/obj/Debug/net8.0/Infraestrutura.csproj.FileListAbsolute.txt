@@ -215,3 +215,5 @@
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Infraestrutura/obj/Debug/net8.0/Infraestrutura.pdb
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Infraestrutura/obj/Debug/net8.0/Infraestrutura.genruntimeconfig.cache
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Infraestrutura/obj/Debug/net8.0/ref/Infraestrutura.dll
+/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Infraestrutura/bin/Debug/net8.0/CloudinaryDotNet.dll
+/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Infraestrutura/bin/Debug/net8.0/Newtonsoft.Json.dll

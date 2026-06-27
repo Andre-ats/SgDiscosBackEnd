@@ -2756,6 +2756,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "CloudinaryDotNet": "1.27.6",
           "Domain": "1.0.0",
           "EntityFramework": "6.4.4",
           "FluentResults": "3.16.0",
@@ -8100,7 +8101,6 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Aplicacao >= 1.0.0",
-      "CloudinaryDotNet >= 1.27.6",
       "Domain >= 1.0.0",
       "Infraestrutura >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 7.0.0",
@@ -8164,10 +8164,6 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
-          "CloudinaryDotNet": {
-            "target": "Package",
-            "version": "[1.27.6, )"
-          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[7.0.0, )"

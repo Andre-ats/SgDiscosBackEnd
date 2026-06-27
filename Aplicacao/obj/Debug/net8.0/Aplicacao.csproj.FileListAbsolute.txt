@@ -156,3 +156,5 @@
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/obj/Debug/net8.0/Aplicacao.pdb
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/obj/Debug/net8.0/Aplicacao.genruntimeconfig.cache
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/obj/Debug/net8.0/ref/Aplicacao.dll
+/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/bin/Debug/net8.0/CloudinaryDotNet.dll
+/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/bin/Debug/net8.0/Newtonsoft.Json.dll
