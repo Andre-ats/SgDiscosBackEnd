@@ -1,20 +1,21 @@
+using Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar.ProdutoAtualizarLinks;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar.ProdutoAtualizarLinks.Enum;
 using Aplicacao.UseCase.UseCasePadrao;
 using Domain.Entidade.ProdutoEntidade;
 using FluentResults;
 using Infraestrutura.Repositorio.ProdutoRepositorio;
 
-namespace Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar.ProdutoAtualizarLinks;
+namespace Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarLinks;
 
-public class ProdutoAtualizarLinksUseCase : UseCaseBase<ProdutoAtualizarLinksUseCaseInput, ProdutoAtualizarLinksUseCaseOutput>
+public class ProdutoAdicionarLinksUseCase : UseCaseBase<ProdutoAdicionarLinksUseCaseInput, ProdutoAdicionarLinksUseCaseOutput>
 {
     private readonly IProdutoRepositorio _produtoRepositorio;
     
-    public ProdutoAtualizarLinksUseCase(IProdutoRepositorio produtoRepositorio)
+    public ProdutoAdicionarLinksUseCase(IProdutoRepositorio produtoRepositorio)
     {
         _produtoRepositorio = produtoRepositorio;
     }
-    protected override Result<ProdutoAtualizarLinksUseCaseOutput> ExecuteUseCase(ProdutoAtualizarLinksUseCaseInput input)
+    protected override Result<ProdutoAdicionarLinksUseCaseOutput> ExecuteUseCase(ProdutoAdicionarLinksUseCaseInput input)
     {
 
         var result = _produtoRepositorio.GetProdutoById(input.IdProduto);
@@ -39,7 +40,7 @@ public class ProdutoAtualizarLinksUseCase : UseCaseBase<ProdutoAtualizarLinksUse
         if (atualizarDados.IsFailed)
             return Result.Fail(atualizarDados.Errors);
             
-        return Result.Ok(new ProdutoAtualizarLinksUseCaseOutput
+        return Result.Ok(new ProdutoAdicionarLinksUseCaseOutput
         {
             Mensagem = "Produto atualizado com sucesso!"
         });

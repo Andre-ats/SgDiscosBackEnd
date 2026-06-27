@@ -1,9 +1,9 @@
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar.ProdutoAtualizarLinks.Enum;
 using Aplicacao.UseCase.UseCasePadrao;
 
-namespace Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar.ProdutoAtualizarLinks;
+namespace Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarLinks;
 
-public class ProdutoAtualizarLinksUseCaseInput : UseCaseBaseInput
+public class ProdutoAdicionarLinksUseCaseInput : UseCaseBaseInput
 {
     public Guid IdProduto { get; set; }
     public EnumTipoArquivo TipoDoArquivo { get; set; }
