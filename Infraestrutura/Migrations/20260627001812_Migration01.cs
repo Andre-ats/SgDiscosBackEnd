@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -41,6 +42,8 @@ namespace Infraestrutura.Migrations
                     FormatoProduto = table.Column<string>(type: "text", nullable: false),
                     TipoDeAlbum = table.Column<string>(type: "text", nullable: false),
                     GenerosMusicaisProduto = table.Column<string>(type: "text", nullable: false),
+                    ListaImagensLinks = table.Column<List<string>>(type: "text[]", nullable: false),
+                    ListaVideosLinks = table.Column<List<string>>(type: "text[]", nullable: false),
                     QuantidadeDeCancoesProduto = table.Column<int>(type: "integer", nullable: true),
                     QuantidadeProduto = table.Column<int>(type: "integer", nullable: false),
                     PrecoProduto = table.Column<decimal>(type: "numeric(18,2)", nullable: false),

@@ -73,6 +73,19 @@ public class EFCoreProdutoRepositorio : IProdutoRepositorio
 
     public Result<Produto> GetProdutoById(Guid id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var produto = _dataBaseContext.ProdutosDB
+                .FirstOrDefault(x => x.Id == id);
+
+            if (produto is null)
+                return Result.Fail("Produto não encontrado.");
+
+            return Result.Ok(produto);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail($"Erro ao buscar o produto: {ex.Message}");
+        }
     }
 }
