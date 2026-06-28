@@ -1,10 +1,10 @@
 using Api.Service.Arquivos;
 using Aplicacao.Service.ArquivosStorage;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarArquivos;
-using Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar.ProdutoAtualizarLinks.Enum;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoExcluirArquivos;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoListagem.ProdutoListar;
+using Domain.Entidade.ProdutoEntidade.EnumsProdutoEntidade;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -67,9 +67,9 @@ public class ProdutoController(
         foreach (var arquivo in arquivoLista.ArquivoLista)
         {
             if(arquivo.ContentType.StartsWith("image/"))
-                arquivos.Add(new ArquivoAdicionarInput(arquivo, EnumTipoArquivo.Imagem));
+                arquivos.Add(new ArquivoAdicionarInput(arquivo, EnumTipoArquivoProduto.Imagem));
             else if(arquivo.ContentType.StartsWith("video/"))
-                arquivos.Add(new ArquivoAdicionarInput(arquivo, EnumTipoArquivo.Video));
+                arquivos.Add(new ArquivoAdicionarInput(arquivo, EnumTipoArquivoProduto.Video));
             else
                 return BadRequest($"Arquivo '{arquivo.FileName}' não é imagem nem vídeo.");
         }
@@ -100,8 +100,8 @@ public class ProdutoController(
             if (string.IsNullOrWhiteSpace(arquivo.PublicId))
                 return BadRequest("PublicId inválido.");
 
-            if (arquivo.EnumTipoArquivo != EnumTipoArquivo.Imagem &&
-                arquivo.EnumTipoArquivo != EnumTipoArquivo.Video)
+            if (arquivo.EnumTipoArquivo != EnumTipoArquivoProduto.Imagem &&
+                arquivo.EnumTipoArquivo != EnumTipoArquivoProduto.Video)
                 return BadRequest($"Tipo inválido para o arquivo '{arquivo.PublicId}'.");
         }
 

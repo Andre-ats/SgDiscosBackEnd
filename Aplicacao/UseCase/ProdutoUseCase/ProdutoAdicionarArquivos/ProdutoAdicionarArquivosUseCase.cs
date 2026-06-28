@@ -1,9 +1,8 @@
 using Aplicacao.Service.ArquivosStorage;
-using Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar.ProdutoAtualizarLinks;
-using Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar.ProdutoAtualizarLinks.Enum;
 using Aplicacao.UseCase.UseCaseAsync;
 using Aplicacao.UseCase.UseCasePadrao;
 using Domain.Entidade.ProdutoEntidade;
+using Domain.Entidade.ProdutoEntidade.EnumsProdutoEntidade;
 using FluentResults;
 using Infraestrutura.Repositorio.ProdutoRepositorio;
 
@@ -32,23 +31,23 @@ public class ProdutoAdicionarArquivosUseCase : UseCaseAsyncBase<ProdutoAdicionar
         foreach (var arquivo in input.ArquivoAdicionarInputs)
         {
 
-            if (arquivo.EnumTipoArquivo == EnumTipoArquivo.Imagem)
+            if (arquivo.EnumTipoArquivo == EnumTipoArquivoProduto.Imagem)
             {
                 var uploadImage = await _arquivosStorageService.UploadImageAsync(arquivo.Arquivo);
                 
                 if (uploadImage.IsFailed)
                     return Result.Fail(uploadImage.Errors);
                 
-                produto.AdicionarImagem(uploadImage.Value.PublicId);
+                produto.AdicionarArquivo(new ArquivosProduto(uploadImage.Value.PublicId, EnumTipoArquivoProduto.Imagem));
             }
-            else if (arquivo.EnumTipoArquivo == EnumTipoArquivo.Video)
+            else if (arquivo.EnumTipoArquivo == EnumTipoArquivoProduto.Video)
             {
                 var uploadVideo = await _arquivosStorageService.UploadVideoAsync(arquivo.Arquivo);
                 
                 if (uploadVideo.IsFailed)
                     return Result.Fail(uploadVideo.Errors);
                 
-                produto.AdicionarVideo(uploadVideo.Value.PublicId);
+                produto.AdicionarArquivo(new ArquivosProduto(uploadVideo.Value.PublicId, EnumTipoArquivoProduto.Video));
             }
             else
                 return Result.Fail("Erro em adicionar a Url, tente novamente");

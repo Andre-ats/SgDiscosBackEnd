@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -7,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infraestrutura.Migrations
 {
     /// <inheritdoc />
-    public partial class Migration01 : Migration
+    public partial class Migration001 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -42,8 +41,6 @@ namespace Infraestrutura.Migrations
                     FormatoProduto = table.Column<string>(type: "text", nullable: false),
                     TipoDeAlbum = table.Column<string>(type: "text", nullable: false),
                     GenerosMusicaisProduto = table.Column<string>(type: "text", nullable: false),
-                    ListaImagensLinks = table.Column<List<string>>(type: "text[]", nullable: false),
-                    ListaVideosLinks = table.Column<List<string>>(type: "text[]", nullable: false),
                     QuantidadeDeCancoesProduto = table.Column<int>(type: "integer", nullable: true),
                     QuantidadeProduto = table.Column<int>(type: "integer", nullable: false),
                     PrecoProduto = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
@@ -55,6 +52,31 @@ namespace Infraestrutura.Migrations
                 {
                     table.PrimaryKey("PK_Produtos", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "ProdutoArquivos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    PublicId = table.Column<string>(type: "text", nullable: false),
+                    TipoArquivoProduto = table.Column<string>(type: "text", nullable: false),
+                    ProdutoId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProdutoArquivos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProdutoArquivos_Produtos_ProdutoId",
+                        column: x => x.ProdutoId,
+                        principalTable: "Produtos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProdutoArquivos_ProdutoId",
+                table: "ProdutoArquivos",
+                column: "ProdutoId");
         }
 
         /// <inheritdoc />
@@ -62,6 +84,9 @@ namespace Infraestrutura.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Admin");
+
+            migrationBuilder.DropTable(
+                name: "ProdutoArquivos");
 
             migrationBuilder.DropTable(
                 name: "Produtos");

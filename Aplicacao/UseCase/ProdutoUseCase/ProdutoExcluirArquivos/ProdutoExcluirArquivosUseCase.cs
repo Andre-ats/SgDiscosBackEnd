@@ -1,8 +1,8 @@
 using Aplicacao.Service.ArquivosStorage;
-using Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar.ProdutoAtualizarLinks.Enum;
 using Aplicacao.UseCase.UseCaseAsync;
 using CloudinaryDotNet.Actions;
 using Domain.Entidade.ProdutoEntidade;
+using Domain.Entidade.ProdutoEntidade.EnumsProdutoEntidade;
 using FluentResults;
 using Infraestrutura.Repositorio.ProdutoRepositorio;
 
@@ -31,23 +31,23 @@ public class ProdutoExcluirArquivosUseCase : UseCaseAsyncBase<ProdutoExcluirArqu
         
         foreach (var arquivo in input.ArquivoLista)
         {
-            if (arquivo.EnumTipoArquivo == EnumTipoArquivo.Imagem)
+            if (arquivo.EnumTipoArquivo == EnumTipoArquivoProduto.Imagem)
             {
                 var deleteArquivo = await _arquivosStorageService.DeleteArquivo(arquivo.PublicId, ResourceType.Image);
 
                 if (deleteArquivo.IsFailed)
                     return Result.Fail(deleteArquivo.Errors);
 
-                produto.ExcluirImagem(arquivo.PublicId);
+                produto.ExcluirArquivo(arquivo.PublicId);
             }
-            else if (arquivo.EnumTipoArquivo == EnumTipoArquivo.Video)
+            else if (arquivo.EnumTipoArquivo == EnumTipoArquivoProduto.Video)
             {
                 var deleteArquivo = await _arquivosStorageService.DeleteArquivo(arquivo.PublicId, ResourceType.Video);
 
                 if (deleteArquivo.IsFailed)
                     return Result.Fail(deleteArquivo.Errors);
 
-                produto.ExcluirVideo(arquivo.PublicId);
+                produto.ExcluirArquivo(arquivo.PublicId);
             }
             else
                 return Result.Fail("Erro em excluir a Url, tente novamente");

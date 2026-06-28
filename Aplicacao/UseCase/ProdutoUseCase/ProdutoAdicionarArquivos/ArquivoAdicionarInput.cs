@@ -1,13 +1,13 @@
-using Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar.ProdutoAtualizarLinks.Enum;
+using Domain.Entidade.ProdutoEntidade.EnumsProdutoEntidade;
 
 namespace Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarArquivos;
 
 public class ArquivoAdicionarInput
 {
     public IFormFile Arquivo { get; set; }
-    public EnumTipoArquivo EnumTipoArquivo { get; set; }
+    public EnumTipoArquivoProduto EnumTipoArquivo { get; set; }
 
-    public ArquivoAdicionarInput(IFormFile arquivo, EnumTipoArquivo tipoArquivo)
+    public ArquivoAdicionarInput(IFormFile arquivo, EnumTipoArquivoProduto tipoArquivo)
     {
         Arquivo = arquivo;
         EnumTipoArquivo = tipoArquivo;

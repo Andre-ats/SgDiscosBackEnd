@@ -1,13 +1,13 @@
-using Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar.ProdutoAtualizarLinks.Enum;
+using Domain.Entidade.ProdutoEntidade.EnumsProdutoEntidade;
 
 namespace Aplicacao.UseCase.ProdutoUseCase.ProdutoExcluirArquivos;
 
 public class ArquivoExcluirInput
 {
     public string PublicId { get; set; }
-    public EnumTipoArquivo EnumTipoArquivo { get; set; }
+    public EnumTipoArquivoProduto EnumTipoArquivo { get; set; }
 
-    public ArquivoExcluirInput(string publicId, EnumTipoArquivo tipoArquivo)
+    public ArquivoExcluirInput(string publicId, EnumTipoArquivoProduto tipoArquivo)
     {
         PublicId = publicId;
         EnumTipoArquivo = tipoArquivo;

@@ -13,9 +13,7 @@ public class Produto : EntidadeBase
     public EnumFormatoProduto FormatoProduto { get; protected set; }
     public EnumTipoDeAlbum TipoDeAlbum { get; protected set; }
     public List<EnumGeneroMusicalProduto> GenerosMusicaisProduto { get; protected set; }
-    public List<string> ListaImagensLinks { get; protected set; } = [];
-    public List<string> ListaVideosLinks { get; protected set; } = [];
-    
+    public List<ArquivosProduto> ArquivosProdutos { get; protected set; } = new();
     public int? QuantidadeDeCancoesProduto { get; protected set; }
     public int QuantidadeProduto { get; protected set; }
     public decimal PrecoProduto { get; protected set; }
@@ -49,43 +47,29 @@ public class Produto : EntidadeBase
         return produto;
     }
 
-    public Produto AdicionarImagem(string urlImagem)
+    public Produto AdicionarArquivo(ArquivosProduto arquivo)
     {
-        if (string.IsNullOrWhiteSpace(urlImagem))
+        if (string.IsNullOrWhiteSpace(arquivo.PublicId))
             return this;
         
-        ListaImagensLinks.Add(urlImagem);
+        ArquivosProdutos.Add(arquivo);
 
         return this;
     }
     
-    public Produto AdicionarVideo(string urlVideo)
+    public Produto ExcluirArquivo(string publicId)
     {
-        if (string.IsNullOrWhiteSpace(urlVideo))
-            return this;
-        
-        ListaVideosLinks.Add(urlVideo);
-
-        return this;
-    }
-
-    public Produto ExcluirImagem(string urlImagem)
-    {
-        if (string.IsNullOrWhiteSpace(urlImagem))
+        if (string.IsNullOrWhiteSpace(publicId))
             return this;
 
-        ListaImagensLinks.Remove(urlImagem);
+        var arquivo = ArquivosProdutos.FirstOrDefault(x => x.PublicId == publicId);
+
+        if (arquivo is null)
+            return this;
+
+        ArquivosProdutos.Remove(arquivo);
 
         return this;
     }
     
-    public Produto ExcluirVideo(string urlImagem)
-    {
-        if (string.IsNullOrWhiteSpace(urlImagem))
-            return this;
-
-        ListaVideosLinks.Remove(urlImagem);
-
-        return this;
-    }
 }

@@ -103,6 +103,23 @@ public class DataBaseContext : DbContext
 
             entity.Property(p => p.DataDeAtualizacao)
                 .IsRequired();
+            
+            entity.OwnsMany(p => p.ArquivosProdutos, arquivo =>
+            {
+                arquivo.ToTable("ProdutoArquivos");
+
+                arquivo.WithOwner().HasForeignKey("ProdutoId");
+
+                arquivo.Property<Guid>("Id");
+                arquivo.HasKey("Id");
+
+                arquivo.Property(a => a.PublicId)
+                    .IsRequired();
+
+                arquivo.Property(a => a.TipoArquivoProduto)
+                    .HasConversion<string>()
+                    .IsRequired();
+            });
         });
     }
 
