@@ -1,4 +1,4 @@
-namespace Aplicacao.Service.ArquivosStorage;
+namespace Api.Service.Arquivos;
 
 public class ArquivoStorageServiceInput
 {

@@ -7,19 +7,19 @@ using Domain.Entidade.ProdutoEntidade;
 using FluentResults;
 using Infraestrutura.Repositorio.ProdutoRepositorio;
 
-namespace Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarLinks;
+namespace Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarArquivos;
 
-public class ProdutoAdicionarLinksUseCase : UseCaseAsyncBase<ProdutoAdicionarLinksUseCaseInput, ProdutoAdicionarLinksUseCaseOutput>
+public class ProdutoAdicionarArquivosUseCase : UseCaseAsyncBase<ProdutoAdicionarArquivosUseCaseInput, ProdutoAdicionarArquivosUseCaseOutput>
 {
     private readonly IProdutoRepositorio _produtoRepositorio;
     private readonly IArquivosStorageService _arquivosStorageService;
     
-    public ProdutoAdicionarLinksUseCase(IProdutoRepositorio produtoRepositorio, IArquivosStorageService arquivosStorageService)
+    public ProdutoAdicionarArquivosUseCase(IProdutoRepositorio produtoRepositorio, IArquivosStorageService arquivosStorageService)
     {
         _produtoRepositorio = produtoRepositorio;
         _arquivosStorageService = arquivosStorageService;
     }
-    protected override async Task<Result<ProdutoAdicionarLinksUseCaseOutput>> ExecuteUseCase(ProdutoAdicionarLinksUseCaseInput input)
+    protected override async Task<Result<ProdutoAdicionarArquivosUseCaseOutput>> ExecuteUseCase(ProdutoAdicionarArquivosUseCaseInput input)
     {
 
         var result = _produtoRepositorio.GetProdutoById(input.IdProduto);
@@ -29,21 +29,21 @@ public class ProdutoAdicionarLinksUseCase : UseCaseAsyncBase<ProdutoAdicionarLin
 
         Produto produto = result.Value;
 
-        foreach (var arquivoUrl in input.ArquivoLista)
+        foreach (var arquivo in input.ArquivoAdicionarInputs)
         {
 
-            if (input.TipoDoArquivo == EnumTipoArquivo.Imagem)
+            if (arquivo.EnumTipoArquivo == EnumTipoArquivo.Imagem)
             {
-                var uploadImage = await _arquivosStorageService.UploadImageAsync(arquivoUrl);
+                var uploadImage = await _arquivosStorageService.UploadImageAsync(arquivo.Arquivo);
                 
                 if (uploadImage.IsFailed)
                     return Result.Fail(uploadImage.Errors);
                 
                 produto.AdicionarImagem(uploadImage.Value.PublicId);
             }
-            else if (input.TipoDoArquivo == EnumTipoArquivo.Video)
+            else if (arquivo.EnumTipoArquivo == EnumTipoArquivo.Video)
             {
-                var uploadVideo = await _arquivosStorageService.UploadVideoAsync(arquivoUrl);
+                var uploadVideo = await _arquivosStorageService.UploadVideoAsync(arquivo.Arquivo);
                 
                 if (uploadVideo.IsFailed)
                     return Result.Fail(uploadVideo.Errors);
@@ -59,7 +59,7 @@ public class ProdutoAdicionarLinksUseCase : UseCaseAsyncBase<ProdutoAdicionarLin
         if (atualizarDados.IsFailed)
             return Result.Fail(atualizarDados.Errors);
             
-        return Result.Ok(new ProdutoAdicionarLinksUseCaseOutput
+        return Result.Ok(new ProdutoAdicionarArquivosUseCaseOutput
         {
             Mensagem = "Produto atualizado com sucesso!"
         });

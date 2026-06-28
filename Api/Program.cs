@@ -3,8 +3,9 @@ using Api.Config;
 using Api.Service.TokenService;
 using Aplicacao.Service.ArquivosStorage;
 using Aplicacao.UseCase.AdminUseCase.AdminLogin;
-using Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarLinks;
+using Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarArquivos;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;
+using Aplicacao.UseCase.ProdutoUseCase.ProdutoExcluirArquivos;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoListagem.ProdutoListar;
 using Infraestrutura.Repositorio;
 using Infraestrutura.Repositorio.AdminRepositorio;
@@ -58,7 +59,8 @@ builder.Services.AddScoped<AdminLoginUseCase>();
 builder.Services.AddScoped<IProdutoRepositorio, EFCoreProdutoRepositorio>();
 builder.Services.AddScoped<ProdutoCadastrarUseCase>();
 builder.Services.AddScoped<ProdutoListarUseCase>();
-builder.Services.AddScoped<ProdutoAdicionarLinksUseCase>();
+builder.Services.AddScoped<ProdutoAdicionarArquivosUseCase>();
+builder.Services.AddScoped<ProdutoExcluirArquivosUseCase>();
 
 builder.Services.AddScoped<IArquivosStorageService, ArquivosStorageService>();
 

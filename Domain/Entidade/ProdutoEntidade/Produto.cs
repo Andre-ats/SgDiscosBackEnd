@@ -68,4 +68,24 @@ public class Produto : EntidadeBase
 
         return this;
     }
+
+    public Produto ExcluirImagem(string urlImagem)
+    {
+        if (string.IsNullOrWhiteSpace(urlImagem))
+            return this;
+
+        ListaImagensLinks.Remove(urlImagem);
+
+        return this;
+    }
+    
+    public Produto ExcluirVideo(string urlImagem)
+    {
+        if (string.IsNullOrWhiteSpace(urlImagem))
+            return this;
+
+        ListaVideosLinks.Remove(urlImagem);
+
+        return this;
+    }
 }
