@@ -11,12 +11,12 @@ var r = produtoFactory.CriarProdutoFactory(
     null,
     "EUA",
     2010,
-    EnumEmbalagemProduto.Vazio,
-    EnumFormatoProduto.Vazio,
-    EnumTipoDeAlbum.Vazio,
+    EnumEmbalagemProduto.Aberto,
+    EnumFormatoProduto.Vinil,
+    EnumTipoDeAlbum.Album,
     new List<EnumGeneroMusicalProduto>()
     {
-        EnumGeneroMusicalProduto.Teste
+        EnumGeneroMusicalProduto.Ambient
     },
     null,
     10,
