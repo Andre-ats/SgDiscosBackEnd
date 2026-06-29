@@ -1,9 +1,9 @@
 using Api.Service.Arquivos;
-using Aplicacao.Service.ArquivosStorage;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarArquivos;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoExcluirArquivos;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoListagem.ProdutoListar;
+using Aplicacao.UseCase.ProdutoUseCase.ProdutoMudarStatus;
 using Domain.Entidade.ProdutoEntidade.EnumsProdutoEntidade;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +15,9 @@ namespace Api.Controller.Produto;
 public class ProdutoController(
     ProdutoCadastrarUseCase produtoCadastrarUseCase,
     ProdutoListarUseCase produtoListarUseCase,
-    IArquivosStorageService arquivosStorageService,
     ProdutoAdicionarArquivosUseCase produtoAdicionarArquivosUseCase,
-    ProdutoExcluirArquivosUseCase excluirArquivosUseCase
+    ProdutoExcluirArquivosUseCase excluirArquivosUseCase,
+    ProdutoMudarStatusUseCase produtoMudarStatusUseCase
     ) : ControllerBase
 {
     [Authorize(Roles = "Admin")]
@@ -112,5 +112,20 @@ public class ProdutoController(
             return BadRequest(response.Errors.Select(e => e.Message));
 
         return Ok(response.Value.Mensagem);
+    }
+    
+    [Authorize(Roles = "Admin")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(401)]
+    [ProducesResponseType(400)]
+    [HttpPut("UpdateStatusProduto")]
+    public IActionResult UpdateStatusProduto([FromBody] ProdutoMudarStatusUseCaseInput produtoMudarStatusUseCaseInput) {
+        
+        var resultExecuteUseCase = produtoMudarStatusUseCase.Execute(produtoMudarStatusUseCaseInput);
+
+        if (resultExecuteUseCase.IsFailed) 
+            return BadRequest(resultExecuteUseCase.Errors.Select(e => e.Message));
+
+        return Ok(resultExecuteUseCase.Value.Mensagem);
     }
 }

@@ -74,5 +74,15 @@ public class Produto : EntidadeBase
 
         return this;
     }
+
+    public Produto MudarStatus(EnumStatusProduto statusProduto)
+    {
+        if (!Enum.IsDefined(typeof(EnumStatusProduto), statusProduto))
+            return this;
+        
+        StatusProduto = statusProduto;
+
+        return this;
+    }
     
 }
