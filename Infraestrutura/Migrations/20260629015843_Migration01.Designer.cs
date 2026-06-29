@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infraestrutura.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20260628053409_Migration001")]
-    partial class Migration001
+    [Migration("20260629015843_Migration01")]
+    partial class Migration01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,6 +110,10 @@ namespace Infraestrutura.Migrations
 
                     b.Property<int>("QuantidadeProduto")
                         .HasColumnType("integer");
+
+                    b.Property<string>("StatusProduto")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("TipoDeAlbum")
                         .IsRequired()

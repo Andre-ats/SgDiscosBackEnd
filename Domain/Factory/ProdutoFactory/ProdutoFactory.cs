@@ -9,7 +9,7 @@ public class ProdutoFactory
 {
     public Result<Produto> CriarProdutoFactory(string nomeProduto, string nomeArtistaBandaProduto, string? empresaProduto, string? origemProduto,
         int? anoLancamentoProduto, EnumEmbalagemProduto embalagemProduto, EnumFormatoProduto formatoProduto, EnumTipoDeAlbum tipoDeAlbum, 
-        List<EnumGeneroMusicalProduto> generoMusicalProdutos, int? quantidadeDeCancoesProduto, int quantidadeProduto, decimal precoProduto)
+        List<EnumGeneroMusicalProduto> generoMusicalProdutos, int? quantidadeDeCancoesProduto, int quantidadeProduto, decimal precoProduto, EnumStatusProduto statusProduto)
     {
         
         var camposString = new (string? valor, string nome, int min, int max, bool obrigatorio)[]
@@ -80,6 +80,9 @@ public class ProdutoFactory
         if (!Enum.IsDefined(tipoDeAlbum))
             return Result.Fail("Tipo de álbum inválido.");
         
+        if (!Enum.IsDefined(statusProduto))
+            return Result.Fail("Status inválido.");
+        
         if (generoMusicalProdutos.Count == 0)
             return Result.Fail("É obrigatório informar ao menos um gênero musical.");
 
@@ -98,7 +101,8 @@ public class ProdutoFactory
             generoMusicalProdutos,
             quantidadeDeCancoesProduto,
             quantidadeProduto,
-            precoProduto
+            precoProduto,
+            statusProduto
         );
 
         return Result.Ok(produto);

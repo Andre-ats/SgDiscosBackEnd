@@ -18,4 +18,5 @@ public class ProdutoCadastrarUseCaseInput : UseCaseBaseInput
     public int? QuantidadeDeCancoesProduto { get; set; }
     public int QuantidadeProduto { get; set; }
     public decimal PrecoProduto { get; set; }
+    public EnumStatusProduto StatusProduto { get; set; }
 }

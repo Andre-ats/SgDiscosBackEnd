@@ -108,6 +108,10 @@ namespace Infraestrutura.Migrations
                     b.Property<int>("QuantidadeProduto")
                         .HasColumnType("integer");
 
+                    b.Property<string>("StatusProduto")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("TipoDeAlbum")
                         .IsRequired()
                         .HasColumnType("text");

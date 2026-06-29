@@ -18,12 +18,14 @@ public class Produto : EntidadeBase
     public int QuantidadeProduto { get; protected set; }
     public decimal PrecoProduto { get; protected set; }
     public decimal? PrecoDescontoProduto { get; protected set; }
+    public EnumStatusProduto StatusProduto { get; protected set; }
     
     private Produto(){}
 
     public static Produto CriarProduto(string nome, string nomeArtistaBanda, string? empresa, 
         string? origem, int? anoLancamento, EnumEmbalagemProduto embalagem, 
-        EnumFormatoProduto formato, EnumTipoDeAlbum tipoDeAlbum, List<EnumGeneroMusicalProduto> generoMusical, int? quantidadeCancoes, int quantidade, decimal preco)
+        EnumFormatoProduto formato, EnumTipoDeAlbum tipoDeAlbum, List<EnumGeneroMusicalProduto> generoMusical, 
+        int? quantidadeCancoes, int quantidade, decimal preco, EnumStatusProduto statusProduto)
     {
         Produto produto = new Produto()
         {
@@ -42,7 +44,8 @@ public class Produto : EntidadeBase
             PrecoProduto = preco,
             DataDeCriacao = DateTime.Now,
             DataDeAtualizacao = DateTime.Now,
-            PrecoDescontoProduto = null
+            PrecoDescontoProduto = null,
+            StatusProduto = statusProduto
         };
         return produto;
     }

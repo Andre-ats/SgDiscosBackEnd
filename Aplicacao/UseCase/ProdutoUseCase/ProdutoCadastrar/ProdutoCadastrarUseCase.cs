@@ -31,7 +31,8 @@ public class ProdutoCadastrarUseCase : UseCaseBase<ProdutoCadastrarUseCaseInput,
             produtoInput.GenerosMusicaisProduto,
             produtoInput.QuantidadeDeCancoesProduto,
             produtoInput.QuantidadeProduto,
-            produtoInput.PrecoProduto
+            produtoInput.PrecoProduto,
+            produtoInput.StatusProduto
         );
 
         if (produtoResult.IsFailed)

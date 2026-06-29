@@ -20,7 +20,8 @@ var r = produtoFactory.CriarProdutoFactory(
     },
     null,
     10,
-    100m
+    100m,
+    EnumStatusProduto.Ativo
 );
 
 
