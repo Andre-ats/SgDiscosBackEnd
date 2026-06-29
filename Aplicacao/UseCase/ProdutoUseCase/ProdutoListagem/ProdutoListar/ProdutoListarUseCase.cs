@@ -20,8 +20,14 @@ public class ProdutoListarUseCase : UseCaseBase<ProdutoListarUseCaseInput, Produ
         if (paginacaoResult.IsFailed)
             return Result.Fail(paginacaoResult.Errors);
         
-        var resultado =
-            _produtoRepositorio.ListarProdutos(input.PaginacaoInput.PaginaAtual, input.PaginacaoInput.ItensPorPagina);
+        var resultado = _produtoRepositorio.ListarProdutos(
+            input.PaginacaoInput.PaginaAtual,
+            input.PaginacaoInput.ItensPorPagina,
+            input.NomeProduto,
+            input.GeneroMusical,
+            input.FormatoProduto,
+            input.TipoDeAlbum,
+            input.StatusProduto);
 
         if (resultado.IsFailed)
             return Result.Fail(resultado.Errors);

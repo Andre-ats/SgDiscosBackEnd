@@ -1,5 +1,6 @@
 using System.Data.Entity;
 using Domain.Entidade.ProdutoEntidade;
+using Domain.Entidade.ProdutoEntidade.EnumsProdutoEntidade;
 using FluentResults;
 
 namespace Infraestrutura.Repositorio.ProdutoRepositorio;
@@ -32,15 +33,51 @@ public class EFCoreProdutoRepositorio : IProdutoRepositorio
             : Result.Fail("Erro ao salvar o item.");
     }
 
-    public Result<(List<Produto> Produtos, int TotalItens)> ListarProdutos(int paginaAtual, int itensPorPagina)
+    public Result<(List<Produto> Produtos, int TotalItens)> ListarProdutos(
+        int paginaAtual,
+        int itensPorPagina,
+        string? nomeProduto,
+        EnumGeneroMusicalProduto? generoMusical,
+        EnumFormatoProduto? formatoProduto,
+        EnumTipoDeAlbum? tipoDeAlbum,
+        EnumStatusProduto? statusProduto)
     {
         try
         {
-            var query = _dataBaseContext.ProdutosDB.AsNoTracking();
+            var query = _dataBaseContext.ProdutosDB
+                .AsNoTracking()
+                .AsQueryable();
 
-            var totalItens = query.Count();
+            if (!string.IsNullOrWhiteSpace(nomeProduto))
+            {
+                var nome = nomeProduto.ToLower();
 
-            var produtos = query
+                query = query.Where(x =>
+                    x.NomeProduto.ToLower().Contains(nome) ||
+                    x.NomeArtistaBandaProduto.ToLower().Contains(nome));
+            }
+
+            if (formatoProduto.HasValue)
+                query = query.Where(x => x.FormatoProduto == formatoProduto.Value);
+
+            if (tipoDeAlbum.HasValue)
+                query = query.Where(x => x.TipoDeAlbum == tipoDeAlbum.Value);
+
+            if (statusProduto.HasValue)
+                query = query.Where(x => x.StatusProduto == statusProduto.Value);
+
+            var lista = query.ToList();
+
+            if (generoMusical.HasValue)
+            {
+                lista = lista
+                    .Where(x => x.GenerosMusicaisProduto.Contains(generoMusical.Value))
+                    .ToList();
+            }
+
+            var totalItens = lista.Count;
+
+            var produtos = lista
                 .Skip((paginaAtual - 1) * itensPorPagina)
                 .Take(itensPorPagina)
                 .ToList();
