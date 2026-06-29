@@ -3,6 +3,7 @@ using Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarArquivos;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoExcluirArquivos;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoListagem.ProdutoListar;
+using Aplicacao.UseCase.ProdutoUseCase.ProdutoListagem.ProdutoListarById;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoMudarStatus;
 using Domain.Entidade.ProdutoEntidade.EnumsProdutoEntidade;
 using Microsoft.AspNetCore.Authorization;
@@ -17,7 +18,8 @@ public class ProdutoController(
     ProdutoListarUseCase produtoListarUseCase,
     ProdutoAdicionarArquivosUseCase produtoAdicionarArquivosUseCase,
     ProdutoExcluirArquivosUseCase excluirArquivosUseCase,
-    ProdutoMudarStatusUseCase produtoMudarStatusUseCase
+    ProdutoMudarStatusUseCase produtoMudarStatusUseCase,
+    ProdutoListarByIdUseCase produtoListarByIdUseCase
     ) : ControllerBase
 {
     [Authorize(Roles = "Admin")]
@@ -44,6 +46,22 @@ public class ProdutoController(
     public ActionResult<ProdutoListarUseCaseOutput> ListarProdutos([FromQuery] ProdutoListarUseCaseInput input)
     {
         var result = produtoListarUseCase.Execute(input);
+        
+        if (result.IsFailed)
+            return BadRequest(result.Errors);
+
+        return Ok(result.Value);
+    }
+    
+    [AllowAnonymous]
+    [ProducesResponseType(201)]
+    [ProducesResponseType(401)]
+    [ProducesResponseType(400)]
+    [Produces("application/json")]
+    [HttpGet(Name = "ListarProdutosById")]
+    public ActionResult<ProdutoListarUseCaseOutput> ListarProdutosById([FromQuery] ProdutoListarByIdUseCaseInput input)
+    {
+        var result = produtoListarByIdUseCase.Execute(input);
         
         if (result.IsFailed)
             return BadRequest(result.Errors);

@@ -7,6 +7,7 @@ using Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarArquivos;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoExcluirArquivos;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoListagem.ProdutoListar;
+using Aplicacao.UseCase.ProdutoUseCase.ProdutoListagem.ProdutoListarById;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoMudarStatus;
 using Infraestrutura.Repositorio;
 using Infraestrutura.Repositorio.AdminRepositorio;
@@ -63,6 +64,7 @@ builder.Services.AddScoped<ProdutoListarUseCase>();
 builder.Services.AddScoped<ProdutoAdicionarArquivosUseCase>();
 builder.Services.AddScoped<ProdutoExcluirArquivosUseCase>();
 builder.Services.AddScoped<ProdutoMudarStatusUseCase>();
+builder.Services.AddScoped<ProdutoListarByIdUseCase>();
 
 builder.Services.AddScoped<IArquivosStorageService, ArquivosStorageService>();
 
