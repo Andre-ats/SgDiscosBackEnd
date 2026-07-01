@@ -8,9 +8,11 @@ ProdutoFactory produtoFactory = new ProdutoFactory();
 var r = produtoFactory.CriarProdutoFactory(
     "Astro World",
     "Travis Scott",
+    "aaaaaaaaaaaaaaaaaaaaaaaaa",
     null,
     "EUA",
     2010,
+    "123123123123",
     EnumEmbalagemProduto.Aberto,
     EnumFormatoProduto.Vinil,
     EnumTipoDeAlbum.Album,

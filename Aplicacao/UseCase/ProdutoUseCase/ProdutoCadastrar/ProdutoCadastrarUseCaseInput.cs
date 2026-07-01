@@ -8,9 +8,11 @@ public class ProdutoCadastrarUseCaseInput : UseCaseBaseInput
 {
     public string NomeProduto { get; set; }
     public string NomeArtistaBandaProduto { get; set; }
+    public string DescricaoProduto { get; set; }
     public string? EmpresaProduto { get; set; }
     public string? OrigemProduto { get; set; }
     public int? AnoLancamentoProduto { get; set; }
+    public string CodigoBarra { get; set; }
     public EnumEmbalagemProduto EmbalagemProduto { get; set; }
     public EnumFormatoProduto FormatoProduto { get; set; }
     public EnumTipoDeAlbum TipoDeAlbum { get; set; }

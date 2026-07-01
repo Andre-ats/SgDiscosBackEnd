@@ -7,8 +7,8 @@ namespace Domain.Factory.ProdutoFactory;
 
 public class ProdutoFactory
 {
-    public Result<Produto> CriarProdutoFactory(string nomeProduto, string nomeArtistaBandaProduto, string? empresaProduto, string? origemProduto,
-        int? anoLancamentoProduto, EnumEmbalagemProduto embalagemProduto, EnumFormatoProduto formatoProduto, EnumTipoDeAlbum tipoDeAlbum, 
+    public Result<Produto> CriarProdutoFactory(string nomeProduto, string nomeArtistaBandaProduto, string descricaoProduto, string? empresaProduto, string? origemProduto,
+        int? anoLancamentoProduto, string codigoBarra, EnumEmbalagemProduto embalagemProduto, EnumFormatoProduto formatoProduto, EnumTipoDeAlbum tipoDeAlbum, 
         List<EnumGeneroMusicalProduto> generoMusicalProdutos, int? quantidadeDeCancoesProduto, int quantidadeProduto, decimal precoProduto, EnumStatusProduto statusProduto)
     {
         
@@ -16,8 +16,10 @@ public class ProdutoFactory
         {
             (nomeProduto, "Nome do Produto", 2, 80, true),
             (nomeArtistaBandaProduto, "Nome do Artista", 2, 80, true),
+            (descricaoProduto, "Descricao do Produto", 10, 2000, true),
             (empresaProduto, "Empresa", 2, 80, false),
-            (origemProduto, "Origem", 2, 80, false)
+            (origemProduto, "Origem", 2, 80, false),
+            (codigoBarra, "Codigo de Barra", 10, 14, true)
         };
         
         var camposInt = new (int? valor, string nome, int min, int max, bool obrigatorio)[]
@@ -92,9 +94,11 @@ public class ProdutoFactory
         var produto = Produto.CriarProduto(
             nomeProduto,
             nomeArtistaBandaProduto,
+            descricaoProduto,
             empresaProduto,
             origemProduto,
             anoLancamentoProduto,
+            codigoBarra,
             embalagemProduto,
             formatoProduto,
             tipoDeAlbum,

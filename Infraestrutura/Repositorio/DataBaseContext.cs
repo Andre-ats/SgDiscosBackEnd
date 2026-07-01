@@ -56,6 +56,14 @@ public class DataBaseContext : DbContext
             entity.Property(p => p.NomeArtistaBandaProduto)
                 .IsRequired()
                 .HasMaxLength(80);
+            
+            entity.Property(p => p.DescricaoProduto)
+                .IsRequired()
+                .HasMaxLength(2000);
+            
+            entity.Property(p => p.CodigoBarra)
+                .IsRequired()
+                .HasMaxLength(14);
 
             entity.Property(p => p.EmpresaProduto)
                 .HasMaxLength(80);

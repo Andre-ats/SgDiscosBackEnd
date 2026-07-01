@@ -9,6 +9,7 @@ using Aplicacao.UseCase.ProdutoUseCase.ProdutoExcluirArquivos;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoListagem.ProdutoListar;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoListagem.ProdutoListarById;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoMudarStatus;
+using CloudinaryDotNet;
 using Infraestrutura.Repositorio;
 using Infraestrutura.Repositorio.AdminRepositorio;
 using Infraestrutura.Repositorio.ProdutoRepositorio;
@@ -16,26 +17,31 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.UseUrls("https://0.0.0.0:7048;http://0.0.0.0:5288");
 
-builder.Services.AddCors(opt =>
+builder.Services.AddCors(options =>
 {
-    opt.AddDefaultPolicy(
-        policy =>
-        {
-            policy.AllowAnyOrigin();
-            policy.AllowAnyHeader();
-            policy.AllowAnyMethod();
-        });
+    options.AddPolicy("FrontEnd", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
 });
-builder.Services.AddControllers()
+
+builder.Services
+    .AddControllers()
     .AddNewtonsoftJson(options =>
-        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-    );
+    {
+        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        options.SerializerSettings.Converters.Add(new StringEnumConverter());
+    });
 
 builder.Services.AddDbContext<DataBaseContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -44,13 +50,13 @@ builder.Services.AddSingleton(provider =>
 {
     var configuration = provider.GetRequiredService<IConfiguration>();
 
-    var account = new CloudinaryDotNet.Account(
+    var account = new Account(
         configuration["Cloudinary:CloudName"],
         configuration["Cloudinary:ApiKey"],
         configuration["Cloudinary:ApiSecret"]
     );
 
-    return new CloudinaryDotNet.Cloudinary(account);
+    return new Cloudinary(account);
 });
 
 builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
@@ -61,96 +67,82 @@ builder.Services.AddScoped<AdminLoginUseCase>();
 builder.Services.AddScoped<IProdutoRepositorio, EFCoreProdutoRepositorio>();
 builder.Services.AddScoped<ProdutoCadastrarUseCase>();
 builder.Services.AddScoped<ProdutoListarUseCase>();
+builder.Services.AddScoped<ProdutoListarByIdUseCase>();
 builder.Services.AddScoped<ProdutoAdicionarArquivosUseCase>();
 builder.Services.AddScoped<ProdutoExcluirArquivosUseCase>();
 builder.Services.AddScoped<ProdutoMudarStatusUseCase>();
-builder.Services.AddScoped<ProdutoListarByIdUseCase>();
 
 builder.Services.AddScoped<IArquivosStorageService, ArquivosStorageService>();
 
-// Add services to the container.
-builder.Services.AddControllers();
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme() 
-    { 
-        Name = "Authorization", 
-        Type = SecuritySchemeType.ApiKey, 
-        Scheme = "Bearer", 
-        BearerFormat = "JWT", 
-        In = ParameterLocation.Header, 
-        Description = "JWT Authorization header using the Bearer scheme. " +
-                      "\r\n\r\n Enter 'Bearer' [space] and then your token in the text input below." +
-                      "\r\n\r\nExample: \"Bearer 12345abcdef\"", 
-    }); 
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
-    { 
-        { 
-            new OpenApiSecurityScheme 
-            { 
-                Reference = new OpenApiReference 
-                { 
-                    Type = ReferenceType.SecurityScheme, 
-                    Id = "Bearer" 
-                } 
-            }, 
-            new string[] {} 
-        } 
-    }); 
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description =
+            "JWT Authorization header using the Bearer scheme.\r\n\r\n" +
+            "Enter 'Bearer' [space] and then your token.\r\n\r\n" +
+            "Example: \"Bearer 12345abcdef\""
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
 });
 
-//Converting enums to string description
-builder.Services
-    .AddControllersWithViews()
-    .AddNewtonsoftJson(options => 
-        options
-            .SerializerSettings
-            .Converters
-            .Add(new StringEnumConverter())
-    );
-
 builder.Services.AddSwaggerGenNewtonsoftSupport();
-builder.Services.AddAuthentication(x =>
+
+builder.Services
+    .AddAuthentication(options =>
     {
-        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     })
-    .AddJwtBearer(
-        options =>
+    .AddJwtBearer(options =>
+    {
+        var key = Encoding.ASCII.GetBytes(JwtConfig.Secret);
+
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
+
+        options.TokenValidationParameters = new TokenValidationParameters
         {
-            var key = Encoding.ASCII.GetBytes(JwtConfig.Secret);
-            options.RequireHttpsMetadata = false;
-            options.SaveToken = true;
-            options.TokenValidationParameters = new TokenValidationParameters()
-            {
-                ValidateIssuerSigningKey = false,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false
-            };
-        }
-    );
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
 
 var app = builder.Build();
-app.UseCors();
-
-// Configure the HTTP request pipeline.
 
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseHttpsRedirection();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseCors("FrontEnd");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
+
 app.Run();
