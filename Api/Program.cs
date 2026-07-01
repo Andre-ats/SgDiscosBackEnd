@@ -2,7 +2,9 @@ using System.Text;
 using Api.Config;
 using Api.Service.TokenService;
 using Aplicacao.Service.ArquivosStorage;
+using Aplicacao.Service.Email;
 using Aplicacao.UseCase.AdminUseCase.AdminLogin;
+using Aplicacao.UseCase.Email.EmailDuvidas;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarArquivos;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoExcluirArquivos;
@@ -22,18 +24,7 @@ using Newtonsoft.Json.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.UseUrls("https://0.0.0.0:7048;http://0.0.0.0:5288");
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("FrontEnd", policy =>
-    {
-        policy
-            .WithOrigins("http://localhost:3000")
-            .AllowAnyHeader()
-            .AllowAnyMethod();
-    });
-});
+builder.WebHost.UseUrls("http://0.0.0.0:5288");
 
 builder.Services
     .AddControllers()
@@ -60,6 +51,8 @@ builder.Services.AddSingleton(provider =>
 });
 
 builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<EmailDuvidasUseCase>();
 
 builder.Services.AddScoped<IAdminRepositorio, EFCoreAdminRepositorio>();
 builder.Services.AddScoped<AdminLoginUseCase>();
@@ -135,10 +128,6 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
-app.UseHttpsRedirection();
-
-app.UseCors("FrontEnd");
 
 app.UseAuthentication();
 app.UseAuthorization();

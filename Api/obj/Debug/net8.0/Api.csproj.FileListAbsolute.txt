@@ -178,3 +178,7 @@
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Api/obj/Debug/net8.0/Api.pdb
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Api/obj/Debug/net8.0/Api.genruntimeconfig.cache
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Api/obj/Debug/net8.0/ref/Api.dll
+/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Api/bin/Debug/net8.0/MailKit.dll
+/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Api/bin/Debug/net8.0/MimeKit.dll
+/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Api/bin/Debug/net8.0/System.Security.Cryptography.Pkcs.dll
+/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Api/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Security.Cryptography.Pkcs.dll
