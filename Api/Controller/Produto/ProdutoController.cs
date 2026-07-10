@@ -82,14 +82,32 @@ public class ProdutoController(
         
         var arquivos = new List<ArquivoAdicionarInput>();
 
+        var ordem = 0;
+
         foreach (var arquivo in arquivoLista.ArquivoLista)
         {
-            if(arquivo.ContentType.StartsWith("image/"))
-                arquivos.Add(new ArquivoAdicionarInput(arquivo, EnumTipoArquivoProduto.Imagem));
-            else if(arquivo.ContentType.StartsWith("video/"))
-                arquivos.Add(new ArquivoAdicionarInput(arquivo, EnumTipoArquivoProduto.Video));
+            ordem++;
+
+            if (arquivo.ContentType.StartsWith("image/"))
+            {
+                arquivos.Add(new ArquivoAdicionarInput(
+                    arquivo,
+                    EnumTipoArquivoProduto.Imagem,
+                    ordem
+                ));
+            }
+            else if (arquivo.ContentType.StartsWith("video/"))
+            {
+                arquivos.Add(new ArquivoAdicionarInput(
+                    arquivo,
+                    EnumTipoArquivoProduto.Video,
+                    ordem
+                ));
+            }
             else
+            {
                 return BadRequest($"Arquivo '{arquivo.FileName}' não é imagem nem vídeo.");
+            }
         }
 
         var response = await produtoAdicionarArquivosUseCase.Execute(

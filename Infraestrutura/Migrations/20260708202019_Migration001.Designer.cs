@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infraestrutura.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20260629015843_Migration01")]
-    partial class Migration01
+    [Migration("20260708202019_Migration001")]
+    partial class Migration001
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,11 +63,21 @@ namespace Infraestrutura.Migrations
                     b.Property<int?>("AnoLancamentoProduto")
                         .HasColumnType("integer");
 
+                    b.Property<string>("CodigoBarra")
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("character varying(14)");
+
                     b.Property<DateTime>("DataDeAtualizacao")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DataDeCriacao")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("DescricaoProduto")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<string>("EmbalagemProduto")
                         .IsRequired()
@@ -131,6 +141,9 @@ namespace Infraestrutura.Migrations
                             b1.Property<Guid>("Id")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("uuid");
+
+                            b1.Property<int>("Ordem")
+                                .HasColumnType("integer");
 
                             b1.Property<Guid>("ProdutoId")
                                 .HasColumnType("uuid");

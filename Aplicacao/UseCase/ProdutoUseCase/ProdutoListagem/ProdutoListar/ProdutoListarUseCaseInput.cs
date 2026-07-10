@@ -8,6 +8,7 @@ public class ProdutoListarUseCaseInput : UseCaseBaseInput
 {
     public PaginacaoInput PaginacaoInput { get; set; } = new();
     public string? NomeProduto { get; set; }
+    public string? CodigoBarra { get; set; }
     public EnumGeneroMusicalProduto? GeneroMusical { get; set; }
     public EnumFormatoProduto? FormatoProduto { get; set; }
     public EnumTipoDeAlbum? TipoDeAlbum { get; set; }

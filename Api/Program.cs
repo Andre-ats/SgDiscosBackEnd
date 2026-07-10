@@ -123,12 +123,24 @@ builder.Services
             ValidateAudience = false
         };
     });
+    
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("FrontEnd", policy =>
+        {
+            policy
+                .WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+    });
 
 var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseCors("FrontEnd");
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infraestrutura.Migrations
 {
     /// <inheritdoc />
-    public partial class Migration01 : Migration
+    public partial class Migration001 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,9 +34,11 @@ namespace Infraestrutura.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     NomeProduto = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     NomeArtistaBandaProduto = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
+                    DescricaoProduto = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: false),
                     EmpresaProduto = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: true),
                     OrigemProduto = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: true),
                     AnoLancamentoProduto = table.Column<int>(type: "integer", nullable: true),
+                    CodigoBarra = table.Column<string>(type: "character varying(14)", maxLength: 14, nullable: false),
                     EmbalagemProduto = table.Column<string>(type: "text", nullable: false),
                     FormatoProduto = table.Column<string>(type: "text", nullable: false),
                     TipoDeAlbum = table.Column<string>(type: "text", nullable: false),
@@ -61,6 +63,7 @@ namespace Infraestrutura.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     PublicId = table.Column<string>(type: "text", nullable: false),
                     TipoArquivoProduto = table.Column<string>(type: "text", nullable: false),
+                    Ordem = table.Column<int>(type: "integer", nullable: false),
                     ProdutoId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>

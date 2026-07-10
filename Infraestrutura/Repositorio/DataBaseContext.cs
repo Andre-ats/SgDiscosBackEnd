@@ -131,6 +131,9 @@ public class DataBaseContext : DbContext
                 arquivo.Property(a => a.TipoArquivoProduto)
                     .HasConversion<string>()
                     .IsRequired();
+                
+                arquivo.Property(a => a.Ordem)
+                    .IsRequired();
             });
         });
     }

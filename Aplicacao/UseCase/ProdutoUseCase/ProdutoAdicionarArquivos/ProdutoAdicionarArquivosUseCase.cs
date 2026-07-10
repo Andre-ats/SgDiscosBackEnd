@@ -38,7 +38,7 @@ public class ProdutoAdicionarArquivosUseCase : UseCaseAsyncBase<ProdutoAdicionar
                 if (uploadImage.IsFailed)
                     return Result.Fail(uploadImage.Errors);
                 
-                produto.AdicionarArquivo(new ArquivosProduto(uploadImage.Value.PublicId, EnumTipoArquivoProduto.Imagem));
+                produto.AdicionarArquivo(new ArquivosProduto(uploadImage.Value.PublicId, EnumTipoArquivoProduto.Imagem, arquivo.Ordem));
             }
             else if (arquivo.EnumTipoArquivo == EnumTipoArquivoProduto.Video)
             {
@@ -47,7 +47,7 @@ public class ProdutoAdicionarArquivosUseCase : UseCaseAsyncBase<ProdutoAdicionar
                 if (uploadVideo.IsFailed)
                     return Result.Fail(uploadVideo.Errors);
                 
-                produto.AdicionarArquivo(new ArquivosProduto(uploadVideo.Value.PublicId, EnumTipoArquivoProduto.Video));
+                produto.AdicionarArquivo(new ArquivosProduto(uploadVideo.Value.PublicId, EnumTipoArquivoProduto.Video, arquivo.Ordem));
             }
             else
                 return Result.Fail("Erro em adicionar a Url, tente novamente");

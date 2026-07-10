@@ -6,10 +6,12 @@ public class ArquivoAdicionarInput
 {
     public IFormFile Arquivo { get; set; }
     public EnumTipoArquivoProduto EnumTipoArquivo { get; set; }
+    public int Ordem { get; set; }
 
-    public ArquivoAdicionarInput(IFormFile arquivo, EnumTipoArquivoProduto tipoArquivo)
+    public ArquivoAdicionarInput(IFormFile arquivo, EnumTipoArquivoProduto tipoArquivo, int ordem)
     {
         Arquivo = arquivo;
         EnumTipoArquivo = tipoArquivo;
+        Ordem = ordem;
     }
 }

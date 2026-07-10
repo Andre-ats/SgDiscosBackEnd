@@ -24,6 +24,7 @@ public class ProdutoListarUseCase : UseCaseBase<ProdutoListarUseCaseInput, Produ
             input.PaginacaoInput.PaginaAtual,
             input.PaginacaoInput.ItensPorPagina,
             input.NomeProduto,
+            input.CodigoBarra,
             input.GeneroMusical,
             input.FormatoProduto,
             input.TipoDeAlbum,

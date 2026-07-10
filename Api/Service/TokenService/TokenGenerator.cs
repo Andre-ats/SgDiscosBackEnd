@@ -10,7 +10,7 @@ namespace Api.Service.TokenService;
 public class TokenGenerator : ITokenGenerator
 {
 
-    private float _tempoExpiracao = 2;
+    private float _tempoExpiracao = 10;
     
     public string CreateToken(UsuarioToken usuarioToken)
     {

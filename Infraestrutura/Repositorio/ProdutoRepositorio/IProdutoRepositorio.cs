@@ -12,6 +12,7 @@ public interface IProdutoRepositorio
         int paginaAtual,
         int itensPorPagina,
         string? nomeProduto,
+        string? codigoBarra,
         EnumGeneroMusicalProduto? generoMusical,
         EnumFormatoProduto? formatoProduto,
         EnumTipoDeAlbum? tipoDeAlbum,

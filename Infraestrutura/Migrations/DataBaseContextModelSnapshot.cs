@@ -60,11 +60,21 @@ namespace Infraestrutura.Migrations
                     b.Property<int?>("AnoLancamentoProduto")
                         .HasColumnType("integer");
 
+                    b.Property<string>("CodigoBarra")
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("character varying(14)");
+
                     b.Property<DateTime>("DataDeAtualizacao")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DataDeCriacao")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("DescricaoProduto")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<string>("EmbalagemProduto")
                         .IsRequired()
@@ -128,6 +138,9 @@ namespace Infraestrutura.Migrations
                             b1.Property<Guid>("Id")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("uuid");
+
+                            b1.Property<int>("Ordem")
+                                .HasColumnType("integer");
 
                             b1.Property<Guid>("ProdutoId")
                                 .HasColumnType("uuid");

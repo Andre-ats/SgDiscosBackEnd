@@ -34,13 +34,14 @@ public class EFCoreProdutoRepositorio : IProdutoRepositorio
     }
 
     public Result<(List<Produto> Produtos, int TotalItens)> ListarProdutos(
-        int paginaAtual,
-        int itensPorPagina,
-        string? nomeProduto,
-        EnumGeneroMusicalProduto? generoMusical,
-        EnumFormatoProduto? formatoProduto,
-        EnumTipoDeAlbum? tipoDeAlbum,
-        EnumStatusProduto? statusProduto)
+    int paginaAtual,
+    int itensPorPagina,
+    string? nomeProduto,
+    string? codigoBarra,
+    EnumGeneroMusicalProduto? generoMusical,
+    EnumFormatoProduto? formatoProduto,
+    EnumTipoDeAlbum? tipoDeAlbum,
+    EnumStatusProduto? statusProduto)
     {
         try
         {
@@ -57,6 +58,14 @@ public class EFCoreProdutoRepositorio : IProdutoRepositorio
                     x.NomeArtistaBandaProduto.ToLower().Contains(nome));
             }
 
+            if (!string.IsNullOrWhiteSpace(codigoBarra))
+            {
+                var codigo = codigoBarra.ToLower();
+
+                query = query.Where(x =>
+                    x.CodigoBarra.ToLower().Contains(codigo));
+            }
+
             if (formatoProduto.HasValue)
                 query = query.Where(x => x.FormatoProduto == formatoProduto.Value);
 
@@ -67,6 +76,11 @@ public class EFCoreProdutoRepositorio : IProdutoRepositorio
                 query = query.Where(x => x.StatusProduto == statusProduto.Value);
 
             var lista = query.ToList();
+
+            foreach (var produto in lista)
+            {
+                produto.ArquivosProdutos.Sort((a, b) => a.Ordem.CompareTo(b.Ordem));
+            }
 
             if (generoMusical.HasValue)
             {
@@ -117,6 +131,8 @@ public class EFCoreProdutoRepositorio : IProdutoRepositorio
 
             if (produto is null)
                 return Result.Fail("Produto não encontrado.");
+
+            produto.ArquivosProdutos.Sort((a, b) => a.Ordem.CompareTo(b.Ordem));
 
             return Result.Ok(produto);
         }

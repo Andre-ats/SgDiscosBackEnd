@@ -34,10 +34,10 @@ public class EFCoreAdminRepositorio : IAdminRepositorio
         var admin = _dataBaseContext.AdminsDB.FirstOrDefault(x => x.Email == email);
         
         if (admin is null)
-            return Result.Fail("E-mail não encontrado");
+            return Result.Fail("E-mail ou senha não encontrado");
 
         if (admin.Senha != senha)
-            return Result.Fail("Senha incorreta");
+            return Result.Fail("E-mail ou senha não encontrado");
 
         return Result.Ok(admin);
     }

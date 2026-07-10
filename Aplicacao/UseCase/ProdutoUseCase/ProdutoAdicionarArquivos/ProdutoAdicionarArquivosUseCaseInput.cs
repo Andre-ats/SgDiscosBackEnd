@@ -6,6 +6,7 @@ public class ProdutoAdicionarArquivosUseCaseInput : UseCaseAsyncBaseInput
 {
     public Guid IdProduto { get; set; }
     public List<ArquivoAdicionarInput> ArquivoAdicionarInputs { get; set; }
+    public int Ordem { get; set; }
 
     public ProdutoAdicionarArquivosUseCaseInput(Guid idProduto, List<ArquivoAdicionarInput> arquivoLista)
     {
