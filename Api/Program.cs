@@ -24,7 +24,7 @@ using Newtonsoft.Json.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.UseUrls("http://0.0.0.0:5288");
+builder.WebHost.UseUrls("http://127.0.0.1:5001");
 
 builder.Services
     .AddControllers()
@@ -129,7 +129,10 @@ builder.Services
         options.AddPolicy("FrontEnd", policy =>
         {
             policy
-                .WithOrigins("http://localhost:3000")
+                .WithOrigins("http://localhost:3000",
+                            "http://localhost:3001",
+                            "https://admin-develop.sgdiscos.com.br",             
+                            "https://sgdiscos.com.br")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
