@@ -1,5 +1,3 @@
-/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Domain/bin/Debug/net8.0/appsettings.Development.json
-/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Domain/bin/Debug/net8.0/appsettings.json
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Domain/bin/Debug/net8.0/Domain
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Domain/bin/Debug/net8.0/Domain.deps.json
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Domain/bin/Debug/net8.0/Domain.runtimeconfig.json

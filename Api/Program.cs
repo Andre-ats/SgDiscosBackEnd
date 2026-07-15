@@ -132,7 +132,8 @@ builder.Services
                 .WithOrigins("http://localhost:3000",
                             "http://localhost:3001",
                             "https://admin-develop.sgdiscos.com.br",             
-                            "https://sgdiscos.com.br")
+                            "https://sgdiscos.com.br",
+                            "https://develop.sgdiscos.com.br")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });

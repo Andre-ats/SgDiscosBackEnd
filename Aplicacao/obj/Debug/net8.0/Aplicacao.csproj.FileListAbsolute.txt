@@ -3,10 +3,7 @@
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/bin/Debug/net8.0/Domain
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/bin/Debug/net8.0/Infraestrutura.deps.json
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/bin/Debug/net8.0/Infraestrutura.runtimeconfig.json
-/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/bin/Debug/net8.0/appsettings.Production.json
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/bin/Debug/net8.0/Infraestrutura
-/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/bin/Debug/net8.0/appsettings.Development.json
-/home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/bin/Debug/net8.0/appsettings.json
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/bin/Debug/net8.0/Aplicacao
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/bin/Debug/net8.0/Aplicacao.deps.json
 /home/andre/Documents/Programacao/Pessoais/SgDiscos/SgDiscosBackEnd/Aplicacao/bin/Debug/net8.0/Aplicacao.runtimeconfig.json
