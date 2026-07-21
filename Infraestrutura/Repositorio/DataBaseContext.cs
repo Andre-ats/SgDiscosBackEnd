@@ -76,6 +76,10 @@ public class DataBaseContext : DbContext
             entity.Property(p => p.EmbalagemProduto)
                 .IsRequired()
                 .HasConversion<string>();
+            
+            entity.Property(p => p.QuantidadeDiscos)
+                .IsRequired()
+                .HasConversion<string>();
 
             entity.Property(p => p.FormatoProduto)
                 .IsRequired()
@@ -102,6 +106,8 @@ public class DataBaseContext : DbContext
 
             entity.Property(p => p.QuantidadeProduto)
                 .IsRequired();
+
+            entity.Property(p => p.QuantidadeDiscos);
 
             entity.Property(p => p.PrecoProduto)
                 .IsRequired()
