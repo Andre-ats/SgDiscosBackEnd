@@ -77,7 +77,7 @@ public class DataBaseContext : DbContext
                 .IsRequired()
                 .HasConversion<string>();
             
-            entity.Property(p => p.QuantidadeDiscos)
+            entity.Property(p => p.Condicao)
                 .IsRequired()
                 .HasConversion<string>();
 
