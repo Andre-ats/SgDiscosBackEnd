@@ -9,7 +9,8 @@ public class ProdutoFactory
 {
     public Result<Produto> CriarProdutoFactory(string nomeProduto, string nomeArtistaBandaProduto, string descricaoProduto, string? empresaProduto, string? origemProduto,
         int? anoLancamentoProduto, string codigoBarra, EnumEmbalagemProduto embalagemProduto, EnumFormatoProduto formatoProduto, EnumTipoDeAlbum tipoDeAlbum, 
-        List<EnumGeneroMusicalProduto> generoMusicalProdutos, int? quantidadeDeCancoesProduto, int quantidadeProduto, decimal precoProduto, EnumStatusProduto statusProduto)
+        List<EnumGeneroMusicalProduto> generoMusicalProdutos, int? quantidadeDeCancoesProduto, int quantidadeProduto, decimal precoProduto, EnumStatusProduto statusProduto, 
+        EnumCondicao condicao, int quantiaDiscos)
     {
         
         var camposString = new (string? valor, string nome, int min, int max, bool obrigatorio)[]
@@ -27,6 +28,7 @@ public class ProdutoFactory
             (anoLancamentoProduto, "Ano de Lançamento", 1900, DateTime.UtcNow.Year + 1, false),
             (quantidadeDeCancoesProduto, "Quantia de Canções", 1, 150, false),
             (quantidadeProduto, "Quantidade de Produto", 1, 1000, true),
+            (quantiaDiscos, "Quantidade de Discos", 1, 20, false)
         };
         
         var camposDecimal = new (decimal? valor, string nome, decimal min, decimal max, bool obrigatorio)[]
@@ -75,6 +77,9 @@ public class ProdutoFactory
         
         if (!Enum.IsDefined(embalagemProduto))
             return Result.Fail("Embalagem inválida.");
+        
+        if (!Enum.IsDefined(condicao))
+            return Result.Fail("Condição inválida.");
 
         if (!Enum.IsDefined(formatoProduto))
             return Result.Fail("Formato inválido.");
@@ -106,7 +111,9 @@ public class ProdutoFactory
             quantidadeDeCancoesProduto,
             quantidadeProduto,
             precoProduto,
-            statusProduto
+            statusProduto,
+            condicao,
+            quantiaDiscos
         );
 
         return Result.Ok(produto);

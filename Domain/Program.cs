@@ -13,7 +13,7 @@ var r = produtoFactory.CriarProdutoFactory(
     "EUA",
     2010,
     "123123123123",
-    EnumEmbalagemProduto.Aberto,
+    EnumEmbalagemProduto.Lacrado,
     EnumFormatoProduto.Vinil,
     EnumTipoDeAlbum.Album,
     new List<EnumGeneroMusicalProduto>()
@@ -23,7 +23,9 @@ var r = produtoFactory.CriarProdutoFactory(
     null,
     10,
     100m,
-    EnumStatusProduto.Ativo
+    EnumStatusProduto.Ativo,
+    EnumCondicao.Novo,
+    10
 );
 
 

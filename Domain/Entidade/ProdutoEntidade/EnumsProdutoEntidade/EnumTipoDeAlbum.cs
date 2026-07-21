@@ -6,7 +6,6 @@ public enum EnumTipoDeAlbum
     EP,
     Single,
     Live,
-    Soundtrack,
     Remix,
     Deluxe
 }

@@ -1,7 +1,7 @@
 namespace Domain.Entidade.ProdutoEntidade.EnumsProdutoEntidade;
 
-public enum EnumEmbalagemProduto
+public enum EnumCondicao
 {
-    Lacrado,
-    Deslacrado,
+    Novo,
+    Usado
 }

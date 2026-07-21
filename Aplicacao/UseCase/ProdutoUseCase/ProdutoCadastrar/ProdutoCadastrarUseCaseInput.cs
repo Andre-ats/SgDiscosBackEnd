@@ -16,9 +16,11 @@ public class ProdutoCadastrarUseCaseInput : UseCaseBaseInput
     public EnumEmbalagemProduto EmbalagemProduto { get; set; }
     public EnumFormatoProduto FormatoProduto { get; set; }
     public EnumTipoDeAlbum TipoDeAlbum { get; set; }
+    public EnumCondicao Condicao { get; set; }
     public List<EnumGeneroMusicalProduto> GenerosMusicaisProduto { get; set; }
     public int? QuantidadeDeCancoesProduto { get; set; }
     public int QuantidadeProduto { get; set; }
+    public int QuantidadeDiscos { get; set; }
     public decimal PrecoProduto { get; set; }
     public EnumStatusProduto StatusProduto { get; set; }
 }

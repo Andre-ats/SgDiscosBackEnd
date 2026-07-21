@@ -5,5 +5,5 @@ public enum EnumStatusProduto
     Ativo,
     Inativo,
     Esgotado,
-    EmBreve
+    PreVenda
 }
