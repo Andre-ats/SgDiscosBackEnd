@@ -1,7 +1,7 @@
-using System.Data.Entity;
 using Domain.Entidade.ProdutoEntidade;
 using Domain.Entidade.ProdutoEntidade.EnumsProdutoEntidade;
 using FluentResults;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infraestrutura.Repositorio.ProdutoRepositorio;
 

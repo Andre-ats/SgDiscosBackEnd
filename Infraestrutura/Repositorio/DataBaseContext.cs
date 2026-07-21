@@ -2,6 +2,8 @@ using Domain.Entidade.AdminEntidade;
 using Domain.Entidade.ProdutoEntidade;
 using Domain.Entidade.ProdutoEntidade.EnumsProdutoEntidade;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Infraestrutura.Repositorio;
 
