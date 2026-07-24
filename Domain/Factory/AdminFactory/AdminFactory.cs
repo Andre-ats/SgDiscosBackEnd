@@ -8,11 +8,7 @@ namespace Domain.Factory.AdminFactory;
 
 public class AdminFactory
 {
-    public string _Nome { get; protected set; }
-    public string _Email { get; protected set; }
-    public string _Senha { get; protected set; }
-
-    public static Result<Admin> CriarAdminFactory(string nome, string email, string senha)
+    public Result<Admin> CriarAdminFactory(string nome, string email, string senha)
     {
         var nomeValidar = NomeAdminValidacao.Validar(nome);
         if (nomeValidar.IsFailed) return Result.Fail(nomeValidar.Errors);

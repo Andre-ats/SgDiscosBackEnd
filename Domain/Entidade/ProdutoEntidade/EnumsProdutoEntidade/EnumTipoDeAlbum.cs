@@ -2,5 +2,10 @@ namespace Domain.Entidade.ProdutoEntidade.EnumsProdutoEntidade;
 
 public enum EnumTipoDeAlbum
 {
-    Vazio
+    Album,
+    EP,
+    Single,
+    Live,
+    Remix,
+    Deluxe
 }

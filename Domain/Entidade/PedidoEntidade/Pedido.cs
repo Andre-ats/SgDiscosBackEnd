@@ -14,7 +14,7 @@ public class Pedido : EntidadeBase
     
     private Pedido(){}
 
-    public Pedido CriarPedido(Usuario usuario, List<ProdutoPedido> listaProduto)
+    public static Pedido CriarPedido(Usuario usuario, List<ProdutoPedido> listaProduto)
     {
         Pedido pedido = new Pedido()
         {
@@ -24,7 +24,7 @@ public class Pedido : EntidadeBase
             ListaProdutos = listaProduto,
             DataDeCriacao = DateTime.Now,
             DataDeAtualizacao = DateTime.Now,
-            PedidoStatus = PedidoStatus
+            PedidoStatus = EnumPedidoStatus.Vazio
         };
         
         return pedido;

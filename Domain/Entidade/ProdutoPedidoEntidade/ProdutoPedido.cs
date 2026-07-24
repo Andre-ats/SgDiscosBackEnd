@@ -13,8 +13,7 @@ public class ProdutoPedido : EntidadeBase
     
     private ProdutoPedido(){}
     
-
-    public ProdutoPedido CriarProdutoPedido(Pedido pedido, Produto produto, int quantidadeProdutoUnico)
+    public static ProdutoPedido CriarProdutoPedido(Pedido pedido, Produto produto, int quantidadeProdutoUnico)
     {
         ProdutoPedido produtoPedido = new ProdutoPedido()
         {
