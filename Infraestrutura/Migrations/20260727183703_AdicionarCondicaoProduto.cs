@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infraestrutura.Migrations
 {
     /// <inheritdoc />
-    public partial class Migration001 : Migration
+    public partial class AdicionarCondicaoProduto : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,8 +43,10 @@ namespace Infraestrutura.Migrations
                     FormatoProduto = table.Column<string>(type: "text", nullable: false),
                     TipoDeAlbum = table.Column<string>(type: "text", nullable: false),
                     GenerosMusicaisProduto = table.Column<string>(type: "text", nullable: false),
+                    Condicao = table.Column<string>(type: "text", nullable: false),
                     QuantidadeDeCancoesProduto = table.Column<int>(type: "integer", nullable: true),
                     QuantidadeProduto = table.Column<int>(type: "integer", nullable: false),
+                    QuantidadeDiscos = table.Column<int>(type: "integer", nullable: false),
                     PrecoProduto = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
                     PrecoDescontoProduto = table.Column<decimal>(type: "numeric(18,2)", nullable: true),
                     StatusProduto = table.Column<string>(type: "text", nullable: false),

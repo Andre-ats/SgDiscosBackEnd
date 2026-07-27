@@ -12,15 +12,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infraestrutura.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20260708202019_Migration001")]
-    partial class Migration001
+    [Migration("20260727183703_AdicionarCondicaoProduto")]
+    partial class AdicionarCondicaoProduto
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0-preview.1.24081.2")
+                .HasAnnotation("ProductVersion", "8.0.29")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -68,7 +68,12 @@ namespace Infraestrutura.Migrations
                         .HasMaxLength(14)
                         .HasColumnType("character varying(14)");
 
-                    b.Property<DateTime>("DataDeAtualizacao")
+                    b.Property<string>("Condicao")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("DataDeAtualizacao")
+                        .IsRequired()
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DataDeCriacao")
@@ -116,6 +121,9 @@ namespace Infraestrutura.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("QuantidadeDeCancoesProduto")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("QuantidadeDiscos")
                         .HasColumnType("integer");
 
                     b.Property<int>("QuantidadeProduto")
