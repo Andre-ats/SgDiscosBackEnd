@@ -41,7 +41,8 @@ public class EFCoreProdutoRepositorio : IProdutoRepositorio
     EnumGeneroMusicalProduto? generoMusical,
     EnumFormatoProduto? formatoProduto,
     EnumTipoDeAlbum? tipoDeAlbum,
-    EnumStatusProduto? statusProduto)
+    EnumStatusProduto? statusProduto,
+    bool listarInativos = true)
     {
         try
         {
@@ -71,9 +72,15 @@ public class EFCoreProdutoRepositorio : IProdutoRepositorio
 
             if (tipoDeAlbum.HasValue)
                 query = query.Where(x => x.TipoDeAlbum == tipoDeAlbum.Value);
-
+            
             if (statusProduto.HasValue)
+            {
                 query = query.Where(x => x.StatusProduto == statusProduto.Value);
+            }
+            else if (!listarInativos)
+            {
+                query = query.Where(x => x.StatusProduto != EnumStatusProduto.Inativo);
+            }
 
             var lista = query.ToList();
 
@@ -103,6 +110,7 @@ public class EFCoreProdutoRepositorio : IProdutoRepositorio
             return Result.Fail($"Erro ao listar produtos: {ex.Message}");
         }
     }
+    
 
     public Result<bool> AtualizarProduto(Produto produto)
     {

@@ -16,7 +16,9 @@ public interface IProdutoRepositorio
         EnumGeneroMusicalProduto? generoMusical,
         EnumFormatoProduto? formatoProduto,
         EnumTipoDeAlbum? tipoDeAlbum,
-        EnumStatusProduto? statusProduto);
+        EnumStatusProduto? statusProduto,
+        bool listarInativos = true
+        );
     public Result<bool> AtualizarProduto(Produto produto);
     public Result<Produto> GetProdutoById(Guid id);
 }
