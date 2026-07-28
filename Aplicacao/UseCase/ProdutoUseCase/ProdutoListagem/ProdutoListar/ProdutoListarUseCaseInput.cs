@@ -13,4 +13,5 @@ public class ProdutoListarUseCaseInput : UseCaseBaseInput
     public EnumFormatoProduto? FormatoProduto { get; set; }
     public EnumTipoDeAlbum? TipoDeAlbum { get; set; }
     public EnumStatusProduto? StatusProduto { get; set; }
+    public bool ListarProdutosInativos { get; set; } = true;
 }

@@ -16,16 +16,11 @@ public class ArquivosStorageService : IArquivosStorageService
     
     public async Task<Result<ImageUploadResult>> UploadImageAsync(IFormFile arquivo)
     {
-        var nomeArquivo = Path.GetFileNameWithoutExtension(arquivo.FileName)
-            .Trim()
-            .ToLower()
-            .Replace(" ", "-");
 
         var uploadParams = new ImageUploadParams
         {
             File = new FileDescription(arquivo.FileName, arquivo.OpenReadStream()),
             Folder = "SgDiscos",
-            PublicId = nomeArquivo,
             UniqueFilename = false,
             Overwrite = false
         };
@@ -40,16 +35,11 @@ public class ArquivosStorageService : IArquivosStorageService
 
     public async Task<Result<VideoUploadResult>> UploadVideoAsync(IFormFile arquivo)
     {
-        var nomeArquivo = Path.GetFileNameWithoutExtension(arquivo.FileName)
-            .Trim()
-            .ToLower()
-            .Replace(" ", "-");
 
         var uploadParams = new VideoUploadParams
         {
             File = new FileDescription(arquivo.FileName, arquivo.OpenReadStream()),
             Folder = "SgDiscos",
-            PublicId = nomeArquivo,
             UniqueFilename = false,
             Overwrite = false
         };

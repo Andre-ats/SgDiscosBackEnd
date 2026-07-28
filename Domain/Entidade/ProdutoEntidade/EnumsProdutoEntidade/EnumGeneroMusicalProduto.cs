@@ -50,5 +50,6 @@ public enum EnumGeneroMusicalProduto
     JPop,
     Anime,
     Instrumental,
+    SoulAndRnB,
     Outros
 }

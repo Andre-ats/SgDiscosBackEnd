@@ -28,7 +28,8 @@ public class ProdutoListarUseCase : UseCaseBase<ProdutoListarUseCaseInput, Produ
             input.GeneroMusical,
             input.FormatoProduto,
             input.TipoDeAlbum,
-            input.StatusProduto);
+            input.StatusProduto,
+            input.ListarProdutosInativos);
 
         if (resultado.IsFailed)
             return Result.Fail(resultado.Errors);
