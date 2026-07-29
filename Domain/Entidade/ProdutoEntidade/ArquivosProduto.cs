@@ -16,4 +16,10 @@ public class ArquivosProduto
         TipoArquivoProduto = tipoArquivoProduto;
         Ordem = ordem;
     }
+    
+    public ArquivosProduto AtualizarOrdem(int ordem)
+    {
+        Ordem = ordem;
+        return this;
+    }
 }

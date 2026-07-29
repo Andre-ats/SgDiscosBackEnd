@@ -1,3 +1,4 @@
+using Domain.DTO.Produto;
 using Domain.Entidade.ProdutoEntidade.EnumsProdutoEntidade;
 
 namespace Domain.Entidade.ProdutoEntidade;
@@ -6,7 +7,7 @@ public class Produto : EntidadeBase
 {
     public string NomeProduto { get; protected set; }
     public string NomeArtistaBandaProduto { get; protected set; }
-    public string DescricaoProduto { get; set; }
+    public string DescricaoProduto { get; protected set; }
     public string? EmpresaProduto { get; protected set; }
     public string? OrigemProduto { get; protected set; }
     public int? AnoLancamentoProduto { get; protected set; }
@@ -73,14 +74,15 @@ public class Produto : EntidadeBase
         if (string.IsNullOrWhiteSpace(publicId))
             return this;
 
-        var arquivo = ArquivosProdutos.FirstOrDefault(x => x.PublicId == publicId);
+        var arquivo = ArquivosProdutos
+            .FirstOrDefault(x => x.PublicId == publicId);
 
         if (arquivo is null)
             return this;
 
         ArquivosProdutos.Remove(arquivo);
 
-        return this;
+        return ReordenarArquivos();
     }
 
     public Produto MudarStatus(EnumStatusProduto statusProduto)
@@ -89,6 +91,43 @@ public class Produto : EntidadeBase
             return this;
         
         StatusProduto = statusProduto;
+
+        return this;
+    }
+    
+    public Produto ReordenarArquivos()
+    {
+        ArquivosProdutos = ArquivosProdutos
+            .OrderBy(x => x.Ordem)
+            .ToList();
+
+        for (var i = 0; i < ArquivosProdutos.Count; i++)
+            ArquivosProdutos[i].AtualizarOrdem(i);
+
+        return this;
+    }
+    
+    public Produto Atualizar(ProdutoAtualizarDTO produto)
+    {
+        NomeProduto = produto.NomeProduto;
+        NomeArtistaBandaProduto = produto.NomeArtistaBandaProduto;
+        DescricaoProduto = produto.DescricaoProduto;
+        EmpresaProduto = produto.EmpresaProduto;
+        OrigemProduto = produto.OrigemProduto;
+        AnoLancamentoProduto = produto.AnoLancamentoProduto;
+        CodigoBarra = produto.CodigoBarra;
+        EmbalagemProduto = produto.EmbalagemProduto;
+        FormatoProduto = produto.FormatoProduto;
+        TipoDeAlbum = produto.TipoDeAlbum;
+
+        GenerosMusicaisProduto = produto.GenerosMusicaisProduto;
+
+        QuantidadeDeCancoesProduto = produto.QuantidadeDeCancoesProduto;
+        QuantidadeProduto = produto.QuantidadeProduto;
+        PrecoProduto = produto.PrecoProduto;
+        StatusProduto = produto.StatusProduto;
+        Condicao = produto.Condicao;
+        QuantidadeDiscos = produto.QuantidadeDiscos;
 
         return this;
     }

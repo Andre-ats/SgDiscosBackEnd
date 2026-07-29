@@ -6,6 +6,7 @@ using Aplicacao.Service.Email;
 using Aplicacao.UseCase.AdminUseCase.AdminLogin;
 using Aplicacao.UseCase.Email.EmailDuvidas;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarArquivos;
+using Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoExcluirArquivos;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoListagem.ProdutoListar;
@@ -64,6 +65,7 @@ builder.Services.AddScoped<ProdutoListarByIdUseCase>();
 builder.Services.AddScoped<ProdutoAdicionarArquivosUseCase>();
 builder.Services.AddScoped<ProdutoExcluirArquivosUseCase>();
 builder.Services.AddScoped<ProdutoMudarStatusUseCase>();
+builder.Services.AddScoped<ProdutoAtualizarUseCase>();
 
 builder.Services.AddScoped<IArquivosStorageService, ArquivosStorageService>();
 

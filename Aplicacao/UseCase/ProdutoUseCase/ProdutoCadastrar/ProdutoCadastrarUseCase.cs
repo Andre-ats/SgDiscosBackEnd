@@ -1,6 +1,7 @@
 using Aplicacao.UseCase.UseCasePadrao;
 using Domain.Entidade.ProdutoEntidade;
 using Domain.Factory.ProdutoFactory;
+using Domain.Utilitarios.Validador;
 using FluentResults;
 using Infraestrutura.Repositorio.ProdutoRepositorio;
 
@@ -15,28 +16,10 @@ public class ProdutoCadastrarUseCase : UseCaseBase<ProdutoCadastrarUseCaseInput,
         _produtoRepositorio = produtoRepositorio;
     }
     
-    protected override Result<ProdutoCadastrarUseCaseOutput> ExecuteUseCase(ProdutoCadastrarUseCaseInput input)
+    protected override Result<ProdutoCadastrarUseCaseOutput> ExecuteUseCase(ProdutoCadastrarUseCaseInput produtoInput)
     {
-        var produtoInput = input;
-        
         var produtoResult = new ProdutoFactory().CriarProdutoFactory(
-            produtoInput.NomeProduto,
-            produtoInput.NomeArtistaBandaProduto,
-            produtoInput.DescricaoProduto,
-            produtoInput.EmpresaProduto,
-            produtoInput.OrigemProduto,
-            produtoInput.AnoLancamentoProduto,
-            produtoInput.CodigoBarra,
-            produtoInput.EmbalagemProduto,
-            produtoInput.FormatoProduto,
-            produtoInput.TipoDeAlbum,
-            produtoInput.GenerosMusicaisProduto,
-            produtoInput.QuantidadeDeCancoesProduto,
-            produtoInput.QuantidadeProduto,
-            produtoInput.PrecoProduto,
-            produtoInput.StatusProduto,
-            produtoInput.Condicao,
-            produtoInput.QuantidadeDiscos
+            produtoInput.CriarProdutoDto
         );
 
         if (produtoResult.IsFailed)

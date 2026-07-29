@@ -1,5 +1,6 @@
 using Api.Service.Arquivos;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoAdicionarArquivos;
+using Aplicacao.UseCase.ProdutoUseCase.ProdutoAtualizar;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoCadastrar;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoExcluirArquivos;
 using Aplicacao.UseCase.ProdutoUseCase.ProdutoListagem.ProdutoListar;
@@ -19,7 +20,8 @@ public class ProdutoController(
     ProdutoAdicionarArquivosUseCase produtoAdicionarArquivosUseCase,
     ProdutoExcluirArquivosUseCase excluirArquivosUseCase,
     ProdutoMudarStatusUseCase produtoMudarStatusUseCase,
-    ProdutoListarByIdUseCase produtoListarByIdUseCase
+    ProdutoListarByIdUseCase produtoListarByIdUseCase,
+    ProdutoAtualizarUseCase produtoAtualizarUseCase
     ) : ControllerBase
 {
     [Authorize(Roles = "Admin")]
@@ -77,16 +79,18 @@ public class ProdutoController(
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> UploadArquivos([FromForm] ArquivoStorageServiceInput arquivoLista, [FromHeader] Guid produtoId)
     {
-        if (!arquivoLista.ArquivoLista.Any())
+        if (arquivoLista.ArquivoLista.Count == 0)
             return BadRequest("Nenhum arquivo foi enviado.");
-        
+
+        if (arquivoLista.ArquivoLista.Count != arquivoLista.Ordens.Count)
+            return BadRequest("A quantidade de arquivos e ordens é diferente.");
+
         var arquivos = new List<ArquivoAdicionarInput>();
 
-        var ordem = 0;
-
-        foreach (var arquivo in arquivoLista.ArquivoLista)
+        for (var i = 0; i < arquivoLista.ArquivoLista.Count; i++)
         {
-            ordem++;
+            var arquivo = arquivoLista.ArquivoLista[i];
+            var ordem = arquivoLista.Ordens[i];
 
             if (arquivo.ContentType.StartsWith("image/"))
             {
@@ -106,7 +110,9 @@ public class ProdutoController(
             }
             else
             {
-                return BadRequest($"Arquivo '{arquivo.FileName}' não é imagem nem vídeo.");
+                return BadRequest(
+                    $"Arquivo '{arquivo.FileName}' não é imagem nem vídeo."
+                );
             }
         }
 
@@ -163,5 +169,20 @@ public class ProdutoController(
             return BadRequest(resultExecuteUseCase.Errors.Select(e => e.Message));
 
         return Ok(resultExecuteUseCase.Value.Mensagem);
+    }
+    
+    [Authorize(Roles = "Admin")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(401)]
+    [ProducesResponseType(400)]
+    [HttpPut("UpdateProduto")]
+    public IActionResult UpdateProduto([FromBody] ProdutoAtualizarUseCaseInput produtoMudarStatusUseCaseInput) {
+        
+        var resultExecuteUseCase = produtoAtualizarUseCase.Execute(produtoMudarStatusUseCaseInput);
+
+        if (resultExecuteUseCase.IsFailed) 
+            return BadRequest(resultExecuteUseCase.Errors.Select(e => e.Message));
+
+        return Ok(resultExecuteUseCase.Value);
     }
 }

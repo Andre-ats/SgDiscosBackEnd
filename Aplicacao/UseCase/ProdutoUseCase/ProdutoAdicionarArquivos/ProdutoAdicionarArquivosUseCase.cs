@@ -27,30 +27,49 @@ public class ProdutoAdicionarArquivosUseCase : UseCaseAsyncBase<ProdutoAdicionar
             return Result.Fail(result.Errors);
 
         Produto produto = result.Value;
+        
+        var ultimaOrdem = produto.ArquivosProdutos.Any()
+            ? produto.ArquivosProdutos.Max(x => x.Ordem)
+            : -1;
 
         foreach (var arquivo in input.ArquivoAdicionarInputs)
         {
+            ultimaOrdem++;
 
             if (arquivo.EnumTipoArquivo == EnumTipoArquivoProduto.Imagem)
             {
                 var uploadImage = await _arquivosStorageService.UploadImageAsync(arquivo.Arquivo);
-                
+
                 if (uploadImage.IsFailed)
                     return Result.Fail(uploadImage.Errors);
-                
-                produto.AdicionarArquivo(new ArquivosProduto(uploadImage.Value.PublicId, EnumTipoArquivoProduto.Imagem, arquivo.Ordem));
+
+                produto.AdicionarArquivo(
+                    new ArquivosProduto(
+                        uploadImage.Value.PublicId,
+                        EnumTipoArquivoProduto.Imagem,
+                        ultimaOrdem
+                    )
+                );
             }
             else if (arquivo.EnumTipoArquivo == EnumTipoArquivoProduto.Video)
             {
                 var uploadVideo = await _arquivosStorageService.UploadVideoAsync(arquivo.Arquivo);
-                
+
                 if (uploadVideo.IsFailed)
                     return Result.Fail(uploadVideo.Errors);
-                
-                produto.AdicionarArquivo(new ArquivosProduto(uploadVideo.Value.PublicId, EnumTipoArquivoProduto.Video, arquivo.Ordem));
+
+                produto.AdicionarArquivo(
+                    new ArquivosProduto(
+                        uploadVideo.Value.PublicId,
+                        EnumTipoArquivoProduto.Video,
+                        ultimaOrdem
+                    )
+                );
             }
             else
+            {
                 return Result.Fail("Erro em adicionar a Url, tente novamente");
+            }
         }
 
         var atualizarDados = _produtoRepositorio.AtualizarProduto(produto);
