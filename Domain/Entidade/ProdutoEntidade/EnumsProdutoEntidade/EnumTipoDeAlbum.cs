@@ -5,6 +5,7 @@ public enum EnumTipoDeAlbum
     Album,
     EP,
     Single,
+    Gatefold,
     Live,
     Remix,
     Deluxe
