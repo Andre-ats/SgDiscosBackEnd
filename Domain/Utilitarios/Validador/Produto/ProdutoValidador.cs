@@ -33,7 +33,7 @@ public class ProdutoValidador
         {
             (nomeProduto, "Nome do Produto", 2, 80, true),
             (nomeArtistaBandaProduto, "Nome do Artista", 2, 80, true),
-            (descricaoProduto, "Descricao do Produto", 10, 2000, true),
+            (descricaoProduto, "Descricao do Produto", 10, 4000, true),
             (empresaProduto, "Empresa", 2, 80, false),
             (origemProduto, "Origem", 2, 80, false),
             (codigoBarra, "Codigo de Barra", 10, 14, true)

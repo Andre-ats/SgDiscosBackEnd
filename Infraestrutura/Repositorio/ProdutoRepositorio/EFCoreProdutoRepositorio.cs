@@ -52,11 +52,20 @@ public class EFCoreProdutoRepositorio : IProdutoRepositorio
 
             if (!string.IsNullOrWhiteSpace(nomeProduto))
             {
-                var nome = nomeProduto.ToLower();
+                var busca = nomeProduto.Trim();
 
                 query = query.Where(x =>
-                    x.NomeProduto.ToLower().Contains(nome) ||
-                    x.NomeArtistaBandaProduto.ToLower().Contains(nome));
+                    EF.Functions
+                        .ToTsVector(
+                            "simple_unaccent",
+                            (x.NomeProduto ?? "") + " " +
+                            (x.NomeArtistaBandaProduto ?? "") + " " +
+                            (x.DescricaoProduto ?? "")
+                        )
+                        .Matches(
+                            EF.Functions.PlainToTsQuery("simple_unaccent", busca)
+                        )
+                );
             }
 
             if (!string.IsNullOrWhiteSpace(codigoBarra))

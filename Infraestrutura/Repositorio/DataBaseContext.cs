@@ -40,6 +40,8 @@ public class DataBaseContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         base.OnModelCreating(modelBuilder);
         
+        modelBuilder.HasPostgresExtension("unaccent");
+        
         modelBuilder.Entity<Admin>(user =>
         {
             user.ToTable("Admin");
@@ -61,7 +63,7 @@ public class DataBaseContext : DbContext
             
             entity.Property(p => p.DescricaoProduto)
                 .IsRequired()
-                .HasMaxLength(2000);
+                .HasMaxLength(4000);
             
             entity.Property(p => p.CodigoBarra)
                 .IsRequired()

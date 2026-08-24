@@ -8,7 +8,7 @@ public class Validacao
     {
         if(string.IsNullOrEmpty(nome)) return Result.Fail($"{campo} obrigatório: não pode ser nulo ou vazio.");
         if(nome.Trim().Length < min)  return Result.Fail($"O {campo} deve ter pelo menos {min} caracteres.");
-        if(nome.Trim().Length > max) return Result.Fail($"O nome deve ter no máximo {max} caracteres.");
+        if(nome.Trim().Length > max) return Result.Fail($"O {campo} deve ter no máximo {max} caracteres.");
         
         return Result.Ok();
     }
